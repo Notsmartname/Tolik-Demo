@@ -1,0 +1,70 @@
+FaceMain:
+
+<FaceMain>:
+
+    text_input_a: text_input_a
+    text_input_b: text_input_b
+    output_a: output_a
+    output_b: output_b
+    summa: summa
+
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+        BoxLayout:
+            Button:
+                text: 'Длина'
+                size_hint: None, 1 # Фиксируэт размер(ширину)
+		        width: '200dp'
+		        on_release: root.output_num()
+
+            TextInput:
+                id: text_input_a
+                text: ''
+                input_type: 'number'
+                input_filter: 'int'
+                multiline: False
+
+
+        BoxLayout:
+            Button:
+                text: 'Ширина'
+                size_hint: None, 1 # Фиксируэт размер(ширину)
+		        width: '200dp'
+		        on_release: root.output_num()
+
+            TextInput:
+                id: text_input_b
+                text: ''
+                input_type: 'number'
+                input_filter: 'int'
+                multiline: False
+
+
+        BoxLayout:
+            # Вывод переменных
+            Label:
+                text: 'Длина:'
+                bar_color: .51, .54, .59, 1
+            Label:
+                id: output_a
+                text: ''
+            Label:
+                text: 'Ширина:'
+            Label:
+                id: output_b
+                text: ''
+
+        Button:
+            text: 'Посчитать'
+            on_release: root.col()
+
+        Label:
+            id: summa
+            text: 'Результат'
+
+        Button:
+            text: 'Назад'
+
