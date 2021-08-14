@@ -1,0 +1,45 @@
+GlobalMain:
+
+
+<GlobalMain>:
+    ScreenManager:
+        name: 'main'
+        Screen:
+            name: 'screen1'
+            canvas.before:
+                Color:
+                    rgba: 240,244,29,1
+                Rectangle:
+                    size: self.size
+
+
+            BoxLayout:
+                cols: 1
+                orientation: 'vertical'
+                Label:
+                    color: .82, .94, .26, 1
+                    size_hint: 1, .2
+                    text: 'Главное меню'
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: '15dp'
+                    spacing: '15dp'
+                    Button:
+                        text: 'Button'
+                        background_color: .19, .31, .9, 1
+                        color: .82, .94, .26, 1
+                    Button:
+                        text: 'Button'
+                        background_color: .19, .31, .40, 1
+                        color: .82, .94, .26, 1
+                    Button:
+                        text: 'Button'
+                        background_color: .19, .31, .40, 1
+                        color: .82, .94, .26, 1
+                    Button:
+                        text: 'Button'
+                        background_color: .19, .31, .40, 1
+                        color: .82, .94, .26, 1
+
