@@ -1,0 +1,115 @@
+#: import Factory kivy.factory.Factory
+
+
+# Меню Расчет кладки кирпича
+<KladkaMain>:
+    name: 'расчет кладки'
+#    Screen:
+#        BoxLayout:
+#            orientation: 'vertical'
+#            size: root.width, root.height
+#            padding: 10
+#            spacing: 10
+#            canvas.before:
+#                Color:
+#                    rgba: .28,.33,.96,1
+#                Rectangle:
+#                    size: self.size
+#            GridLayout:
+#                spacing: 5
+#                cols: 1
+#                DefButton:
+#                    text: 'Перегародки'
+#                on_release:
+#                    Factory.Peregorodka().open()
+#                DefButton:
+#                    text: 'Несущие стены'
+#                DefButton:
+#                    text: 'Колонны'
+#                DefButton:
+#                    text: ''
+#                # Кнопка возврата в главное меню
+#            DefButton:
+#                text: 'Назад'
+#                size_hint: 1, .1
+#                on_release:
+#                    app.root.current = 'main'
+#                    root.manager.transition.direction = 'right'
+#
+#
+## Меню расчета облицовки
+#<Peregorodka@Popup>:
+#    name: 'Перегародки'
+#    auto_dismiss: False
+#    title: 'Перегародки'
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 10
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: .28,.33,.96,1
+            Rectangle:
+                size: self.size
+
+
+
+        GridLayout:
+            spacing: 5
+            cols: 2
+            DefLabel:
+                text: 'Погонаж:'
+            DefTextInput:
+                id: kvadrat_input
+                text: 'Обезательно для ввода'
+            DefLabel:
+                text: 'Ширина кирпича:'
+            DefTextInput:
+                id: kvadrat_input
+            DefLabel:
+                text: 'Дляна кирпича:'
+            DefTextInput:
+                id: kvadrat_input
+            DefLabel:
+                text: 'Стоимость кирпича за штуку:'
+            DefTextInput:
+                id: kvadrat_input
+            DefLabel:
+                text: 'Стоимость цемента за кг'
+            DefTextInput:
+                id: kvadrat_input
+            DefLabel:
+                text: 'Стоимость песка за кг:'
+            DefTextInput:
+                id: kvadrat_input
+            DefLabel:
+                text: 'Количество рабочих:'
+            DefTextInput:
+                id: kvadrat_input
+        DefButton:
+            size_hint: 1, .3
+            text: 'Посчитать'
+        GridLayout:
+            size_hint: 1, .75
+            cols: 2
+            DefLabel:
+                text: 'Стоимость работ:'
+            Label:
+                text: ''
+            DefLabel:
+                valign: 'middle'
+                text_size: self.size
+                text: 'Примерное время на выполнеие работ:'
+            Label:
+                valign: 'middle'
+                text_size: self.size
+                text: 'Выведется если графа "Количество рабочих" заполнено'
+        DefButton:
+            text: 'Назад'
+            size_hint: 1, .2
+            on_release:
+                app.root.current = 'main'
+                root.manager.transition.direction = 'right'
+
+

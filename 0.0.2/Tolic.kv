@@ -1,12 +1,14 @@
+#: import Factory kivy.factory.Factory
+#: include OtdelkaMain.kv
+#: include BetonMain.kv
+#: include KladkaMain.kv
+#: include PolMain.kv
 WindowManager:
     GlobalMain:
     OtdelkaMain:
-    OtdelkaFirst:
     BetonMain:
     KladkaMain:
     PolMain:
-    OtdelkaSecend:
-
 
 
 # Кномка в меню
@@ -22,10 +24,10 @@ WindowManager:
     size_hint: 1, .4
     #height: '100dp'
     multiline: False
-    text: 'Введите если необходимо'
+    # text: 'Введите если необходимо'
     input_type: 'number'
     input_filter: 'int'
-    on_focus: self.text = ''
+    # on_focus: self.text = ''
 
 
 
@@ -63,7 +65,7 @@ WindowManager:
                         app.root.current = 'расчет отделки'
                         root.manager.transition.direction = 'left'
                 Button:
-                    text: 'Расчет бетона'
+                    text: 'Расчет бетона(не готов)'
                     background_color: .19, .31, .40, 1
                     color: .82, .94, .26, 1
                     on_release:
@@ -83,276 +85,3 @@ WindowManager:
                     on_release:
                         app.root.current = 'расчет полов'
                         root.manager.transition.direction = 'left'
-
-# Расчет отделки помещений
-<OtdelkaMain>:
-    name: 'расчет отделки'
-
-
-    BoxLayout:
-        orientation: 'vertical'
-        size: root.width, root.height
-        padding: 10
-        spacing: 10
-        canvas.before:
-            Color:
-                rgba: .28,.33,.96,1
-            Rectangle:
-                size: self.size
-        GridLayout:
-            spacing: 5
-            cols: 1
-            DefButton:
-                text: 'Покраска стен'
-                on_release:
-                    app.root.current = 'Покраска стен'
-                    root.manager.transition.direction = 'left'
-            DefButton:
-                text: 'Обои'
-                on_release:
-                    app.root.current = 'Обои'
-                    root.manager.transition.direction = 'left'
-            DefButton:
-                text: 'Облицофка стен'
-            DefButton:
-                text: ''
-        # Кнопка возврата в главное меню
-        DefButton:
-            text: 'Назад'
-            size_hint: 1, .1
-            on_release:
-                app.root.current = 'main'
-                root.manager.transition.direction = 'right'
-
-<BetonMain>:
-    name: 'расчет бетона'
-    Screen:
-        BoxLayout:
-            orientation: 'vertical'
-            size: root.width, root.height
-            padding: 10
-            spacing: 10
-            canvas.before:
-                Color:
-                    rgba: .28,.33,.96,1
-                Rectangle:
-                    size: self.size
-            GridLayout:
-                spacing: 5
-                cols: 1
-                DefButton:
-                    text: 'Покраска стен'
-                DefButton:
-                    text: 'Обои'
-                DefButton:
-                    text: 'Облицофка стен'
-                DefButton:
-                    text: ''
-                # Кнопка возврата в главное меню
-            DefButton:
-                text: 'Назад'
-                size_hint: 1, .1
-                on_release:
-                    app.root.current = 'main'
-                    root.manager.transition.direction = 'right'
-<KladkaMain>:
-    name: 'расчет кладки'
-    Screen:
-        BoxLayout:
-            orientation: 'vertical'
-            size: root.width, root.height
-            padding: 10
-            spacing: 10
-            canvas.before:
-                Color:
-                    rgba: .28,.33,.96,1
-                Rectangle:
-                    size: self.size
-            GridLayout:
-                spacing: 5
-                cols: 1
-                DefButton:
-                    text: 'Покраска стен'
-                DefButton:
-                    text: 'Обои'
-                DefButton:
-                    text: 'Облицофка стен'
-                DefButton:
-                    text: ''
-                # Кнопка возврата в главное меню
-            DefButton:
-                text: 'Назад'
-                size_hint: 1, .1
-                on_release:
-                    app.root.current = 'main'
-                    root.manager.transition.direction = 'right'
-
-<PolMain>:
-    name: 'расчет полов'
-    Screen:
-        BoxLayout:
-            orientation: 'vertical'
-            size: root.width, root.height
-            padding: 10
-            spacing: 10
-            canvas.before:
-                Color:
-                    rgba: .28,.33,.96,1
-                Rectangle:
-                    size: self.size
-
-            GridLayout:
-                spacing: 5
-                cols: 1
-                DefButton:
-                    text: 'Покраска стен'
-                DefButton:
-                    text: 'Обои'
-                DefButton:
-                    text: 'Облицофка стен'
-                DefButton:
-                    text: ''
-                # Кнопка возврата в главное меню
-            DefButton:
-                text: 'Назад'
-                size_hint: 1, .1
-                on_release:
-                    app.root.current = 'main'
-                    root.manager.transition.direction = 'right'
-
-# Покраска стен
-<OtdelkaFirst@Screen>:
-    name: 'Покраска стен'
-    BoxLayout:
-        orientation: 'vertical'
-        size: root.width, root.height
-        padding: 10
-        spacing: 10
-        canvas.before:
-            Color:
-                rgba: .28,.33,.96,1
-            Rectangle:
-                size: self.size
-
-        GridLayout:
-            spacing: 5
-            cols: 2
-            DefLabel:
-                text: 'Квадратура:'
-            DefTextInput:
-                id: kvadrat_input
-                text: 'Обезательно для ввода'
-            DefLabel:
-                text: 'Стоимость шпаклевки за кг:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость краски за литр:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость грунтовки за литр:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость шкурки за метр:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Количество рабочих:'
-            DefTextInput:
-                id: kvadrat_input
-        DefButton:
-            size_hint: 1, .3
-            text: 'Посчитать'
-        GridLayout:
-            cols: 2
-            DefLabel:
-                text: 'Стоимость работ:'
-            Label:
-                text: ''
-            DefLabel:
-                valign: 'middle'
-                text_size: self.size
-                text: 'Примерное время на выполнеие работ:'
-            Label:
-                valign: 'middle'
-                text_size: self.size
-                text: 'Выведется если графа "Количество рабочих" заполнено'
-        DefButton:
-            text: 'Назад'
-            size_hint: 1, .2
-            on_release:
-                app.root.current = 'расчет отделки'
-                root.manager.transition.direction = 'right'
-
-# Меню расчета обоев
-<OtdelkaSecend@Screen>:
-    name: 'Обои'
-    BoxLayout:
-        orientation: 'vertical'
-        size: root.width, root.height
-        padding: 10
-        spacing: 10
-        canvas.before:
-            Color:
-                rgba: .28,.33,.96,1
-            Rectangle:
-                size: self.size
-
-        GridLayout:
-            spacing: 5
-            cols: 2
-            DefLabel:
-                text: 'Квадратура:'
-            DefTextInput:
-                id: kvadrat_input
-                text: 'Обезательно для ввода'
-            DefLabel:
-                text: 'Ширина обоев(по умолчанию 1м):'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость шпаклевки за кг:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость обоев за метр:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость грунтовки за литр:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Стоимость шкурки за метр:'
-            DefTextInput:
-                id: kvadrat_input
-            DefLabel:
-                text: 'Количество рабочих:'
-            DefTextInput:
-                id: kvadrat_input
-        DefButton:
-            size_hint: 1, .3
-            text: 'Посчитать'
-        GridLayout:
-            cols: 2
-            DefLabel:
-                text: 'Стоимость работ:'
-            Label:
-                text: ''
-            DefLabel:
-                valign: 'middle'
-                text_size: self.size
-                text: 'Примерное время на выполнеие работ:'
-            Label:
-                valign: 'middle'
-                text_size: self.size
-                text: 'Выведется если графа "Количество рабочих" заполнено'
-        DefButton:
-            text: 'Назад'
-            size_hint: 1, .2
-            on_release:
-                app.root.current = 'расчет отделки'
-                root.manager.transition.direction = 'right'
-
