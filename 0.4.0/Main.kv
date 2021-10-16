@@ -1,0 +1,328 @@
+#: import md_icons kivymd.icon_definitions.md_icons
+#: import fonts kivymd.font_definitions.fonts
+
+#: import Factory kivy.factory.Factory
+#: include OtdelkaMain.kv
+#: include BetonMain.kv
+#: include KladkaMain.kv
+#: include PolMain.kv
+#: include Beton.kv
+
+#: import environ os.environ
+#: import gch kivy.utils.get_color_from_hex
+##: import StiffScrollEffect kivymd.effects.stiffscroll.StiffScrollEffect
+
+
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
+
+<DefButton@Button>:
+    background_color: .19, .31, .40, 1
+    color: .82, .94, .26, 1
+# Надпись для ввода данных
+<DefLabel@MDLabel>:
+    # halign: 'center'
+    size: self.texture_size
+    theme_text_color: 'Custom'
+    # text_color: .82, .94, .26, 1
+    text_color: app.text_color_label
+    line_height: .8
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+# Now you can simply Mix the `BackgroundColor` class with almost
+# any other widget... to give it a background.
+# <BackgroundLabel@MDLabel+BackgroundColor>
+    # background_color: .40, .23, .72, 1
+    # theme_text_color: 'Custom'
+    # text_color: 1, 1, 1, 1
+    # text_size: self.size
+    # halign: 'left'
+    # valign: 'middle'
+    # line_height: .8
+
+# Строка для ввода данных
+<DefTextInput@MDTextField>:
+    hint_text: "Введите число в см"
+    helper_text: "Только цифры"
+    helper_text_mode: "persistent"
+    # text_color: 1, 1, 1, 1
+
+<DefLabel@MDLabel>:
+    # halign: 'center'
+    size: self.texture_size
+    theme_text_color: 'Custom'
+    # text_color: .82, .94, .26, 1
+    # text_color: 0, 0, 0, 1
+    line_height: .8
+
+<GlobalMain>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+
+
+
+    MDLabel:
+        text: app.title
+        font_style: "Button"
+        adaptive_height: True
+        height: self.texture_size[1]
+
+
+
+#    MDLabel:
+#        text: "kivydevelopment@gmail.com"
+#        font_style: "Caption"
+#        adaptive_height: True
+
+    ScrollView:
+
+        DrawerList:
+            id: md_list
+            OneLineIconListItem:
+                text: "My files"
+                on_release: app.file_manager_open()
+                IconLeftWidget:
+                    icon: "folder"
+
+            OneLineIconListItem:
+                text: "Калькулятор"
+                IconLeftWidget:
+                    icon: "calculator"
+            OneLineIconListItem:
+                text: "Тема светлая/темная"
+                # id: box
+                # adaptive_height: True
+                on_release:
+                    app.switch_theme_style()
+                    # app.show_confirmation_dialog()
+                    # Factory.Diolog().open()
+                IconLeftWidget:
+                    icon: "theme-light-dark"
+            OneLineIconListItem:
+                text: "Обновить"
+                IconLeftWidget:
+                    icon: "upload"
+
+<ItemConfirm>
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
+
+        MDLabel:
+            text: 'Theme:'
+            pos_hint: {'center_x': .1}
+
+<MyTile@SmartTileWithLabel>
+    size_hint_y: None
+    height: "240dp"
+
+
+MDScreen:
+
+    MDNavigationLayout:
+
+        ScreenManager:
+
+            MDScreen:
+
+                MDBoxLayout:
+
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: app.title
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        right_action_items: [['star-outline', lambda x: app.on_star_click()]]
+                        md_bg_color: app.set_md_bg_color
+                        # opposite_colors: True
+
+
+                    MDTabs:
+                        id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        height: '48dp'
+                        background_color: 0.1, 0.1, 0.1, 1
+                        # анимация индекатора
+                        tab_indicator_anim: False
+                        tab_indicator_type: "line-round"                        
+                        indicator_color: 1, 1, 1, 1
+                        
+
+                        Tab:
+                            id: tab1
+                            name: 'отделка поверхностей'
+                            text: f"[ref={'Отделка поверхностей'}][font={fonts[-1]['fn_regular']}]{md_icons['format-paint']}[/font][/ref]  {'Отделка поверхностей'}"
+                            OtdelkaMain:
+
+                        Tab:
+                            id: tab2
+                            name: 'бетон'
+                            text: f"[ref={'Бетон'}][font={fonts[-1]['fn_regular']}]{md_icons['view-compact']}[/font][/ref]  {'Бетон'}"
+                            BetonMain:
+
+                        Tab:
+                            id: tab3
+                            name: 'расчет кладки'
+                            text: f"[ref={'Кирпичная кладка'}][font={fonts[-1]['fn_regular']}]{md_icons['wall']}[/font][/ref]  {'Кирпичная кладка'}"
+
+
+
+                            ScrollView:
+                                do_scroll_x: False
+                                do_scroll_y: True
+
+                                BoxLayout:
+                                    height: '1010sp'
+                                    orientation: 'vertical'
+                                    size_hint_y: None
+
+                                    padding: 10
+                                    spacing: 10
+
+                                    GridLayout:
+                                        size_hint_y: .35
+                                        spacing: 10
+                                        cols: 1
+
+                                        MDTextField:
+                                            id: field
+                                            size_hint_x: None
+                                            width: '200dp'
+                                            hint_text: 'Вид кладки'
+                                            on_focus: if self.focus: app.menu.open()
+ 
+                                        DefTextInput:
+                                            id: pogonash_input
+                                            helper_text: "Обезательно для ввода"
+                                            hint_text: 'Погонаж:'
+                                            text_color: app.text_color_label
+                                            text_color_normal: app.text_color_label
+                                            line_color_focus: app.text_color_label
+
+                                        DefTextInput:
+                                            id: shirina_input
+                                            helper_text: "Обезательно для ввода"
+                                            hint_text: 'Ширина кирпича:'
+                                            text_color: app.text_color_label
+
+                                        DefTextInput:
+                                            id: dlina_input
+                                            helper_text: "Обезательно для ввода"
+                                            hint_text: 'Дляна кирпича:'
+                                            text_color: app.text_color_label
+
+                                        DefTextInput:
+                                            id: kirpich_input
+                                            helper_text: "Не обезательно для ввода"
+                                            hint_text: 'Стоимость кирпича за штуку:'
+                                            text_color: app.text_color_label
+
+                                        DefTextInput:
+                                            id: tsement_input
+                                            helper_text: "Не обезательно для ввода"
+                                            hint_text: 'Стоимость цемента за кг'
+                                            text_color: app.text_color_label
+
+                                        DefTextInput:
+                                            id: pesok_input
+                                            helper_text: "Не обезательно для ввода"
+                                            hint_text: 'Стоимость песка за кг:'
+                                            text_color: app.text_color_label
+                                            
+
+                                        DefTextInput:
+                                            id: workmans_input
+                                            helper_text: "Не обезательно для ввода"
+                                            hint_text: 'Количество рабочих:'
+                                            text_color: app.text_color_label
+
+
+                                    BoxLayout:
+                                        orientation: 'horizontal'
+                                        padding: 10
+                                        spacing: '150sp'
+
+                                        MDRoundFlatButton:
+                                            # size_hint: 1, .1
+                                            theme_text_color: 'Custom'
+                                            text_color: app.text_color_button
+                                            line_color: app.text_color_button
+                                            # pos_hint: {'center_x': .5}
+                                            text: '    Посчитать    '
+                                            on_press:
+                                                app.calculate_kladka(*args)
+
+                                        MDRoundFlatButton:
+                                            # size_hint: 1, .1
+                                            theme_text_color: 'Custom'
+                                            text_color: app.text_color_button
+                                            line_color: app.text_color_button
+                                            # pos_hint: {'center_x': .5}
+                                            text: '    Сохранить   '
+                                            on_press:
+                                                # Создать функцыю по сохранению расчета
+
+                                    GridLayout:
+                                        size_hint: 1, .75
+                                        cols: 1
+                                        DefTextInput:
+                                            id: answer_output
+                                            hint_text: 'Стоимость работ:'
+                                            text_color: app.text_color_label
+                                            disabled: True
+
+                                        DefTextInput:
+                                            # valign: 'middle'
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Примерное время на выполнеие работ:'
+                                            helper_text: 'Выведется если графа "Количество рабочих" заполнено'
+
+                                    # Кнопка возврата в главное меню
+                                    # MDFillRoundFlatButton:
+                                        # pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                                        # text: 'Закрыть'
+                                        # size_hint: 1, .1
+                                        # on_release:
+                                            # root.dismiss()
+                                            # app.root.current = 'main'
+                                            # root.manager.transition.direction = 'right'
+                        Tab:
+                            id: tab4
+                            name: 'расчет пола'
+                            text: 'Пол'
+                            PolMain:
+
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            GlobalMain:
+                id: content_drawer
+
+<FundOne>:
+
