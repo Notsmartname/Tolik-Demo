@@ -523,7 +523,14 @@ class TolikApp(MDApp):
                 ],
             )
         self.dialog.open()'''
+    # Colors fund text
+    color_text_a = .96, .8, .8, 1
+    color_text_b = .95, .91, .5, 1
+    color_text_c = .28, .97, .29, 1
+    color_text_d = .11, .8, .91, 1
+    color_text_f = .96, .11, .96, 1
 
+    # Button and Labels
     text_color_button = 0, 0, 0, 1  # Светлый
     text_color_label = (0, 0, 0, 1)
     menu_text_color_button = 0, 0, 0, 1

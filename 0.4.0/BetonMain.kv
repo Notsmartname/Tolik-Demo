@@ -72,7 +72,7 @@
         do_scroll_y: True
 
         BoxLayout:
-            height: '900sp'
+            height: '800sp'
             orientation: 'vertical'
             size_hint_y: None
             # size: root.width, root.height
@@ -86,41 +86,41 @@
                     size: self.size
                     pos: self.pos
 
+            FitImage:
+                source: 'OneBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
+
             DefTextInput:
                 id: kvadrat_input
-                hint_text: 'Квадратура:'
-                helper_text: "Обезательно для ввода"
+                hint_text: 'Стоимость за 1 куб бетона:'
                 text_color: app.text_color_label
 
             DefTextInput:
                 id: pr_shpak_input
-                hint_text: 'Стоимость шпаклевки за кг:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер A'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_a
 
             DefTextInput:
                 id: pr_color_input
-                hint_text: 'Стоимость краски за литр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер B'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_b
 
             DefTextInput:
                 id: pr_gruntovka_input
-                hint_text: 'Стоимость грунтовки за литр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер С'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_c
 
             DefTextInput:
-                id: pr_shkur_input
-                hint_text: 'Стоимость шкурки за метр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
-
-            DefTextInput:
-                id: workmans_input
-                hint_text: 'Количество рабочих:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                id: pr_gruntovka_input
+                hint_text: 'Высота фундамента'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.text_color_button
 
             MDRoundFlatButton:
                 # size_hint: 1, .1
@@ -134,36 +134,14 @@
 
             MDTextField:
                 id: answer_pr_shpak
-                hint_text: 'Количество ш-ки в кг:'
+                hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
                 id: answer_pr_color
-                hint_text: 'Количество краски:'
+                hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
-            MDTextField:
-                id: answer_pr_gruntovka
-                hint_text: 'Количество грунтовки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_pr_shkur
-                hint_text: 'Количество шкурки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_output
-                hint_text: 'Стоимость работ:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: workmans_input
-                hint_text: 'Примерное время на выполнеие работ:'
-                helper_text: 'Выведется если графа "Количество рабочих" заполнено'
-                text_color: app.text_color_label
-                disabled: True
-
 
             MDRoundFlatButton:
                 text: 'Назад'
@@ -202,41 +180,46 @@
                     size: self.size
                     pos: self.pos
 
+            FitImage:
+                source: 'TwoBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
             DefTextInput:
                 id: kvadrat_input
-                hint_text: 'Квадратура:'
-                helper_text: "Обезательно для ввода"
+                hint_text: 'Стоимость за 1 куб бетона:'
                 text_color: app.text_color_label
 
             DefTextInput:
                 id: pr_shpak_input
-                hint_text: 'Стоимость шпаклевки за кг:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер A'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_a
 
             DefTextInput:
                 id: pr_color_input
-                hint_text: 'Стоимость краски за литр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер B'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_b
 
             DefTextInput:
                 id: pr_gruntovka_input
-                hint_text: 'Стоимость грунтовки за литр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер С'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_c
 
             DefTextInput:
                 id: pr_shkur_input
-                hint_text: 'Стоимость шкурки за метр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер D'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_d
 
             DefTextInput:
-                id: workmans_input
-                hint_text: 'Количество рабочих:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                id: pr_gruntovka_input
+                hint_text: 'Высота фундамента'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.text_color_button
 
             MDRoundFlatButton:
                 # size_hint: 1, .1
@@ -250,36 +233,14 @@
 
             MDTextField:
                 id: answer_pr_shpak
-                hint_text: 'Количество ш-ки в кг:'
+                hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
                 id: answer_pr_color
-                hint_text: 'Количество краски:'
+                hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
-            MDTextField:
-                id: answer_pr_gruntovka
-                hint_text: 'Количество грунтовки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_pr_shkur
-                hint_text: 'Количество шкурки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_output
-                hint_text: 'Стоимость работ:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: workmans_input
-                hint_text: 'Примерное время на выполнеие работ:'
-                helper_text: 'Выведется если графа "Количество рабочих" заполнено'
-                text_color: app.text_color_label
-                disabled: True
-
 
             MDRoundFlatButton:
                 text: 'Назад'
@@ -317,41 +278,52 @@
                     size: self.size
                     pos: self.pos
 
+            FitImage:
+                source: 'TreeBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
             DefTextInput:
                 id: kvadrat_input
                 hint_text: 'Стоимость за 1 куб бетона:'
-                helper_text: "Обезательно для ввода"
                 text_color: app.text_color_label
 
             DefTextInput:
                 id: pr_shpak_input
-                hint_text: 'Длина A'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер A'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_a
 
             DefTextInput:
                 id: pr_color_input
-                hint_text: 'Длина B'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер B'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_b
 
             DefTextInput:
                 id: pr_gruntovka_input
-                hint_text: 'C'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер С'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_c
 
             DefTextInput:
                 id: pr_shkur_input
-                hint_text: 'D'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер D'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_d
 
             DefTextInput:
                 id: workmans_input
-                hint_text: 'Количество рабочих:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер F'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_f
+
+            DefTextInput:
+                id: pr_gruntovka_input
+                hint_text: 'Высота фундамента'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.text_color_button
 
             MDRoundFlatButton:
                 # size_hint: 1, .1
@@ -365,33 +337,12 @@
 
             MDTextField:
                 id: answer_pr_shpak
-                hint_text: 'Количество ш-ки в кг:'
+                hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
                 id: answer_pr_color
-                hint_text: 'Количество краски:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_pr_gruntovka
-                hint_text: 'Количество грунтовки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_pr_shkur
-                hint_text: 'Количество шкурки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_output
-                hint_text: 'Стоимость работ:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: workmans_input
-                hint_text: 'Примерное время на выполнеие работ:'
-                helper_text: 'Выведется если графа "Количество рабочих" заполнено'
+                hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
 
@@ -418,7 +369,7 @@
         do_scroll_y: True
 
         BoxLayout:
-            height: '900sp'
+            height: '1000sp'
             orientation: 'vertical'
             size_hint_y: None
             # size: root.width, root.height
@@ -432,41 +383,58 @@
                     size: self.size
                     pos: self.pos
 
+            FitImage:
+                source: 'FourBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
             DefTextInput:
                 id: kvadrat_input
-                hint_text: 'Квадратура:'
-                helper_text: "Обезательно для ввода"
+                hint_text: 'Стоимость за 1 куб бетона:'
                 text_color: app.text_color_label
 
             DefTextInput:
                 id: pr_shpak_input
-                hint_text: 'Стоимость шпаклевки за кг:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер A'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_a
 
             DefTextInput:
                 id: pr_color_input
-                hint_text: 'Стоимость краски за литр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер B'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_b
 
             DefTextInput:
                 id: pr_gruntovka_input
-                hint_text: 'Стоимость грунтовки за литр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер С'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_c
 
             DefTextInput:
                 id: pr_shkur_input
-                hint_text: 'Стоимость шкурки за метр:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер D1'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_d
+
+            DefTextInput:
+                id: pr_shkur_input
+                hint_text: 'Размер D2'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_d
 
             DefTextInput:
                 id: workmans_input
-                hint_text: 'Количество рабочих:'
-                helper_text: "Не обезательно для ввода"
-                text_color: app.text_color_label
+                hint_text: 'Размер F'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_f
+
+            DefTextInput:
+                id: pr_gruntovka_input
+                hint_text: 'Высота фундамента'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.text_color_button
 
             MDRoundFlatButton:
                 # size_hint: 1, .1
@@ -480,33 +448,12 @@
 
             MDTextField:
                 id: answer_pr_shpak
-                hint_text: 'Количество ш-ки в кг:'
+                hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
                 id: answer_pr_color
-                hint_text: 'Количество краски:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_pr_gruntovka
-                hint_text: 'Количество грунтовки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_pr_shkur
-                hint_text: 'Количество шкурки:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: answer_output
-                hint_text: 'Стоимость работ:'
-                text_color: app.text_color_label
-                disabled: True
-            MDTextField:
-                id: workmans_input
-                hint_text: 'Примерное время на выполнеие работ:'
-                helper_text: 'Выведется если графа "Количество рабочих" заполнено'
+                hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
 
