@@ -1,0 +1,674 @@
+# ver: 0.4.0
+
+#: import Factory kivy.factory.Factory
+# BetonMain:
+
+
+# Меню Расчет бетона
+<BetonMain>:
+    ScrollView:
+
+        MDList:
+
+            TwoLineAvatarListItem:
+                text: 'Ленточный фундамен'
+                secondary_text: "Тип-1"
+                text_color: app.text_color_button
+                on_press:
+                    Factory.OneBeton().open()
+
+                ImageLeftWidget:
+                    size_hint: (None, None)
+                    size: (dp(55), dp(30))
+                    radius: [dp(10)]
+                    source: '1.jpeg'
+
+            TwoLineAvatarListItem:
+                text: 'Ленточный фундамен'
+                secondary_text: "Тип-2"
+                text_color: app.text_color_button
+                on_press:
+                    Factory.TwoBeton().open()
+
+                ImageLeftWidget:
+                    size_hint: (None, None)
+                    size: (dp(55), dp(30))
+                    radius: [dp(10)]
+                    source: '2.jpeg'
+
+            TwoLineAvatarListItem:
+                text: 'Ленточный фундамен'
+                secondary_text: "Тип-3"
+                text_color: app.text_color_button
+                on_press:
+                    Factory.TreeBeton().open()
+
+                ImageLeftWidget:
+                    size_hint: (None, None)
+                    size: (dp(55), dp(30))
+                    radius: [dp(10)]
+                    source: '3.jpeg'
+
+            TwoLineAvatarListItem:
+                text: 'Ленточный фундамен'
+                secondary_text: "Тип-4"
+                text_color: app.text_color_button
+                on_press:
+                    Factory.FourBeton().open()
+
+                ImageLeftWidget:
+                    size_hint: (None, None)
+                    size: (dp(55), dp(30))
+                    radius: [dp(10)]
+                    source: '4.jpeg'
+
+
+<OneBeton>:
+    name: 'Ленточный фундамент'
+    title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '800sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+
+            canvas:
+                Color:
+                    rgba: app.popup_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            FitImage:
+                source: 'OneBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
+
+            DefTextInput:
+                id: pr_cub_input
+                hint_text: 'Стоимость за 1 куб бетона:'
+                text_color: app.text_color_label
+
+            DefTextInput:
+                id: a_input
+                hint_text: 'Размер A'
+                theme_text_color: 'Custom'
+                helper_text_mode: "on_focus"
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                text_color: app.color_text_a
+                line_color_focus: app.color_text_a
+
+            DefTextInput:
+                id: b_input
+                hint_text: 'Размер B'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_b
+                line_color_focus: app.color_text_b
+
+            DefTextInput:
+                id: c_input
+                hint_text: 'Размер С'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_c
+                line_color_focus: app.color_text_c
+
+            DefTextInput:
+                id: h_input
+                hint_text: 'Высота фундамента'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.text_color_button
+
+
+            MDRoundFlatButton:
+                # size_hint: 1, .1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                text: '    Посчитать    '
+                on_press:
+                    root.calculate_beton_1()
+
+            MDTextField:
+                id: answer_beton
+                hint_text: 'Количество бетона в кубах:'
+                text_color: app.text_color_label
+                disabled: True
+            MDTextField:
+                id: answer_pr_beton
+                hint_text: 'Общая стоимость бетона:'
+                text_color: app.text_color_label
+                disabled: True
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    root.dismiss()
+#                    app.root.current = 'расчет отделки'
+#                    root.manager.transition.direction = 'right'
+
+
+<TwoBeton>:
+    name: 'Ленточный фундамент'
+    title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    d_input: d_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+
+            canvas:
+                Color:
+                    rgba: app.popup_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            FitImage:
+                source: 'TwoBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
+            DefTextInput:
+                id: pr_cub_input
+                hint_text: 'Стоимость за 1 куб бетона:'
+                text_color: app.text_color_label
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+
+            DefTextInput:
+                id: a_input
+                hint_text: 'Размер A'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_a
+                line_color_focus: app.color_text_a
+
+            DefTextInput:
+                id: b_input
+                hint_text: 'Размер B'
+                # helper_text: "Не обезательно для ввода"
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_b
+                line_color_focus: app.color_text_b
+
+            DefTextInput:
+                id: c_input
+                hint_text: 'Размер С'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_c
+                line_color_focus: app.color_text_c
+
+            DefTextInput:
+                id: d_input
+                hint_text: 'Размер D'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_d
+                line_color_focus: app.color_text_d
+
+            DefTextInput:
+                id: h_input
+                hint_text: 'Высота фундамента'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.text_color_button
+
+            MDRoundFlatButton:
+                # size_hint: 1, .1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                text: '    Посчитать    '
+                on_press:
+                    root.calculate_beton_2()
+
+            MDTextField:
+                id: answer_beton
+                hint_text: 'Количество бетона в кубах:'
+                text_color: app.text_color_label
+                disabled: True
+            MDTextField:
+                id: answer_pr_beton
+                hint_text: 'Общая стоимость бетона:'
+                text_color: app.text_color_label
+                disabled: True
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    root.dismiss()
+#                    app.root.current = 'расчет отделки'
+#                    root.manager.transition.direction = 'right'
+
+<TreeBeton>
+    name: 'Ленточный фундамент'
+    title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    d_input: d_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '950sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+
+            canvas:
+                Color:
+                    rgba: app.popup_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            FitImage:
+                source: 'TreeBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
+            DefTextInput:
+                id: pr_cub_input
+                hint_text: 'Стоимость за 1 куб бетона:'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                normal_color: app.text_color_label
+
+            DefTextInput:
+                id: a_input
+                hint_text: 'Размер A'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                theme_text_color: 'Custom'
+                text_color: app.color_text_a
+                line_color_focus: app.color_text_a
+
+            DefTextInput:
+                id: b_input
+                hint_text: 'Размер B'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_b
+                line_color_focus: app.color_text_b
+
+            DefTextInput:
+                id: c_input
+                hint_text: 'Размер С'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_c
+                line_color_focus: app.color_text_c
+
+            DefTextInput:
+                id: d_input
+                hint_text: 'Размер D'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_d
+                line_color_focus: app.color_text_d
+
+            DefTextInput:
+                id: f_input
+                hint_text: 'Размер F'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.color_text_f
+                line_color_focus: app.color_text_f
+
+            DefTextInput:
+                id: h_input
+                hint_text: 'Высота фундамента'
+                helper_text: "Единица измерения метры(0.1 метра это 10см)"
+                helper_text_mode: "on_focus"
+                text_color: app.text_color_button
+
+            MDRoundFlatButton:
+                # size_hint: 1, .1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                text: '    Посчитать    '
+                on_press:
+                    root.calculate_beton_3()
+
+            MDTextField:
+                id: answer_beton
+                hint_text: 'Количество бетона в кубах:'
+                text_color: app.text_color_label
+                disabled: True
+            MDTextField:
+                id: answer_pr_beton
+                hint_text: 'Общая стоимость бетона:'
+                text_color: app.text_color_label
+                disabled: True
+
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    root.dismiss()
+#                    app.root.current = 'расчет отделки'
+#                    root.manager.transition.direction = 'right'
+
+<FourBeton>
+    name: 'Ленточный фундамент'
+    title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    d1_input: d1_input
+    d2_input: d2_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '1000sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+
+            canvas:
+                Color:
+                    rgba: app.popup_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            FitImage:
+                source: 'FourBig.jpeg'
+                size_hint: (None, None)
+                size: (dp(480), dp(240))
+                radius: [dp(10),]
+
+            DefTextInput:
+                id: pr_cub_input
+                hint_text: 'Стоимость за 1 куб бетона:'
+                hint_text_color_normal: app.text_color_label
+#                helper_text_mode: 'on_error'
+#                helper_text: 'Введено неверное значение'
+
+            MDTextField:
+                id: a_input
+                hint_text: 'Размер A'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_a
+                line_color_focus: app.color_text_a
+
+
+            MDTextField:
+                id: b_input
+                hint_text: 'Размер B'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_b
+                line_color_focus: app.color_text_b
+
+            DefTextInput:
+                id: c_input
+                hint_text: 'Размер С'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_c
+                line_color_focus: app.color_text_c
+
+            DefTextInput:
+                id: d1_input
+                hint_text: 'Размер D1'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_d
+                line_color_focus: app.color_text_d
+
+            DefTextInput:
+                id: d2_input
+                hint_text: 'Размер D2'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_d
+                line_color_focus: app.color_text_d
+
+            DefTextInput:
+                id: f_input
+                hint_text: 'Размер F'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.color_text_f
+                line_color_focus: app.color_text_f
+
+            DefTextInput:
+                id: h_input
+                hint_text: 'Высота фундамента'
+                # helper_text: "Не обезательно для ввода"
+                text_color: app.text_color_button
+
+            MDRoundFlatButton:
+                # size_hint: 1, .1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                text: '    Посчитать    '
+                on_press:
+                    root.calculate_beton_4()
+
+            MDTextField:
+                id: answer_beton
+                hint_text: 'Количество бетона в кубах:'
+                text_color: app.text_color_label
+                disabled: True
+            MDTextField:
+                id: answer_pr_beton
+                hint_text: 'Общая стоимость бетона:'
+                text_color: app.text_color_label
+                disabled: True
+
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: app.text_color_button
+                line_color: app.text_color_button
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    root.dismiss()
+#                    app.root.current = 'расчет отделки'
+#                    root.manager.transition.direction = 'right'
+
+<ColonaBeton>:
+    name: 'Колонна'
+
+    kvadrat_input: kvadrat_input
+    shirina_input: shirina_input
+    visota_input: visota_input
+    pr_tsement_input: pr_tsement_input
+    pr_pesok_input: pr_pesok_input
+    pr_sheben_input: pr_sheben_input
+    workmans_input: workmans_input
+
+    answer_pr_oboi: answer_pr_oboi
+    answer_pr_gruntovka: answer_pr_gruntovka
+    answer_pr_shkur: answer_pr_shkur
+    answer_output: answer_output
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 5
+                cols: 2
+                DefLabel:
+                    text: 'Количество:'
+                DefTextInput:
+                    id: kvadrat_input
+                    # text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Ширина:'
+                DefTextInput:
+                    id: shirina_input
+                DefLabel:
+                    text: 'Высота:'
+                DefTextInput:
+                    id: visota_input
+                DefLabel:
+                    text: 'Стоимость цемент за кг:'
+                DefTextInput:
+                    id: pr_tsement_input
+                DefLabel:
+                    text: 'Стоимость песок за кг:'
+                DefTextInput:
+                    id: pr_pesok_input
+                DefLabel:
+                    text: 'Стоимость щебня за кг:'
+                DefTextInput:
+                    id: pr_sheben_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            MDRoundFlatButton:
+                # size_hint: 1, .1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                line_color: 0, 0, 0, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                text: '    Посчитать    '
+                on_press:
+                    root.calculate_kraska()
+
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество цемента:'
+                DefLabel:
+                    id: answer_pr_oboi
+                DefLabel:
+                    text: 'Количество песока:'
+                DefLabel:
+                    id: answer_pr_gruntovka
+                DefLabel:
+                    text: 'Количество щебня:'
+                DefLabel:
+                    id: answer_pr_shkur
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет бетона'
+                    root.manager.transition.direction = 'right'
+
+<KarkasArm@Popup>:
+    auto_dismiss: False
+    title: 'Каркас'
+    size_hint: .4, .4
+
+    BoxLayout:
+
+        Button:
+            text: 'Назад'
+            size_hint: 1, .2
+            on_release:
+                root.dismiss()

@@ -21,6 +21,8 @@ WindowManager:
     #height: '100dp'
 # Строка для ввода данных
 <DefTextInput@TextInput>:
+    # font_size: '15dp'
+    text_size: self.minimum_height
     size_hint: 1, .4
     #height: '100dp'
     multiline: False
@@ -28,6 +30,9 @@ WindowManager:
     input_type: 'number'
     input_filter: 'int'
     # on_focus: self.text = ''
+
+
+
 
 
 
@@ -65,7 +70,7 @@ WindowManager:
                         app.root.current = 'расчет отделки'
                         root.manager.transition.direction = 'left'
                 Button:
-                    text: 'Расчет бетона(не готов)'
+                    text: 'Расчет бетона'
                     background_color: .19, .31, .40, 1
                     color: .82, .94, .26, 1
                     on_release:

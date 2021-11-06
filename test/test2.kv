@@ -1,0 +1,14 @@
+<Screen2@Screen>:
+    name: 'screen_2'
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: "Screen 2"
+        Button:
+            text: "to main screen"
+            on_press: app.root.current = "main_screen"
+        Button:
+            text: "to screen 1"
+            on_press: app.root.current = "screen_1"

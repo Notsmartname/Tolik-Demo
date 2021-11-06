@@ -67,6 +67,14 @@
     name: 'Ленточный фундамент'
     title: 'Ленточный фундамент'
 
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
+
     ScrollView:
         do_scroll_x: False
         do_scroll_y: True
@@ -94,33 +102,38 @@
 
 
             DefTextInput:
-                id: kvadrat_input
+                id: pr_cub_input
                 hint_text: 'Стоимость за 1 куб бетона:'
                 text_color: app.text_color_label
 
             DefTextInput:
-                id: pr_shpak_input
+                id: a_input
                 hint_text: 'Размер A'
+                theme_text_color: 'Custom'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_a
+                line_color_focus: app.color_text_a
 
             DefTextInput:
-                id: pr_color_input
+                id: b_input
                 hint_text: 'Размер B'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_b
+                line_color_focus: app.color_text_b
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: c_input
                 hint_text: 'Размер С'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_c
+                line_color_focus: app.color_text_c
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: h_input
                 hint_text: 'Высота фундамента'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.text_color_button
+
 
             MDRoundFlatButton:
                 # size_hint: 1, .1
@@ -133,12 +146,12 @@
                     root.calculate_kraska()
 
             MDTextField:
-                id: answer_pr_shpak
+                id: answer_beton
                 hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
-                id: answer_pr_color
+                id: answer_pr_beton
                 hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
@@ -160,6 +173,15 @@
 <TwoBeton>:
     name: 'Ленточный фундамент'
     title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    d_input: d_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
 
     ScrollView:
         do_scroll_x: False
@@ -187,36 +209,40 @@
                 radius: [dp(10),]
 
             DefTextInput:
-                id: kvadrat_input
+                id: pr_cub_input
                 hint_text: 'Стоимость за 1 куб бетона:'
-                text_color: app.text_color_label
+                text_color:  0, 0, 0, 1# app.text_color_label
 
             DefTextInput:
-                id: pr_shpak_input
+                id: a_input
                 hint_text: 'Размер A'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_a
+                line_color_focus: app.color_text_a
 
             DefTextInput:
-                id: pr_color_input
+                id: b_input
                 hint_text: 'Размер B'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_b
+                line_color_focus: app.color_text_b
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: c_input
                 hint_text: 'Размер С'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_c
+                line_color_focus: app.color_text_c
 
             DefTextInput:
-                id: pr_shkur_input
+                id: d_input
                 hint_text: 'Размер D'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_d
+                line_color_focus: app.color_text_d
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: h_input
                 hint_text: 'Высота фундамента'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.text_color_button
@@ -232,12 +258,12 @@
                     root.calculate_kraska()
 
             MDTextField:
-                id: answer_pr_shpak
+                id: answer_beton
                 hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
-                id: answer_pr_color
+                id: answer_pr_beton
                 hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
@@ -258,6 +284,15 @@
 <TreeBeton>
     name: 'Ленточный фундамент'
     title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    d_input: d_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
 
     ScrollView:
         do_scroll_x: False
@@ -285,42 +320,48 @@
                 radius: [dp(10),]
 
             DefTextInput:
-                id: kvadrat_input
+                id: pr_cub_input
                 hint_text: 'Стоимость за 1 куб бетона:'
-                text_color: app.text_color_label
+                normal_color: app.text_color_label
 
             DefTextInput:
-                id: pr_shpak_input
+                id: a_input
                 hint_text: 'Размер A'
                 # helper_text: "Не обезательно для ввода"
+                theme_text_color: 'Custom'
                 text_color: app.color_text_a
+                line_color_focus: app.color_text_a
 
             DefTextInput:
-                id: pr_color_input
+                id: b_input
                 hint_text: 'Размер B'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_b
+                line_color_focus: app.color_text_b
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: c_input
                 hint_text: 'Размер С'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_c
+                line_color_focus: app.color_text_c
 
             DefTextInput:
-                id: pr_shkur_input
+                id: d_input
                 hint_text: 'Размер D'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_d
+                line_color_focus: app.color_text_d
 
             DefTextInput:
-                id: workmans_input
+                id: f_input
                 hint_text: 'Размер F'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_f
+                line_color_focus: app.color_text_f
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: h_input
                 hint_text: 'Высота фундамента'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.text_color_button
@@ -336,12 +377,12 @@
                     root.calculate_kraska()
 
             MDTextField:
-                id: answer_pr_shpak
+                id: answer_beton
                 hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
-                id: answer_pr_color
+                id: answer_pr_beton
                 hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True
@@ -363,6 +404,16 @@
 <FourBeton>
     name: 'Ленточный фундамент'
     title: 'Ленточный фундамент'
+
+    pr_cub_input: pr_cub_input
+    a_input: a_input
+    b_input: b_input
+    c_input: c_input
+    d1_input: d1_input
+    d2_input: d2_input
+    h_input: h_input
+    answer_beton: answer_beton
+    answer_pr_beton: answer_pr_beton
 
     ScrollView:
         do_scroll_x: False
@@ -390,48 +441,57 @@
                 radius: [dp(10),]
 
             DefTextInput:
-                id: kvadrat_input
+                id: pr_cub_input
                 hint_text: 'Стоимость за 1 куб бетона:'
-                text_color: app.text_color_label
+                hint_text_color_normal: app.text_color_label
+#                helper_text_mode: 'on_error'
+#                helper_text: 'Введено неверное значение'
 
-            DefTextInput:
-                id: pr_shpak_input
+            MDTextField:
+                id: a_input
                 hint_text: 'Размер A'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_a
+                line_color_focus: app.color_text_a
 
-            DefTextInput:
-                id: pr_color_input
+
+            MDTextField:
+                id: b_input
                 hint_text: 'Размер B'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_b
+                line_color_focus: app.color_text_b
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: c_input
                 hint_text: 'Размер С'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_c
+                line_color_focus: app.color_text_c
 
             DefTextInput:
-                id: pr_shkur_input
+                id: d1_input
                 hint_text: 'Размер D1'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_d
+                line_color_focus: app.color_text_d
 
             DefTextInput:
-                id: pr_shkur_input
+                id: d2_input
                 hint_text: 'Размер D2'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_d
+                line_color_focus: app.color_text_d
 
             DefTextInput:
-                id: workmans_input
+                id: f_input
                 hint_text: 'Размер F'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.color_text_f
+                line_color_focus: app.color_text_f
 
             DefTextInput:
-                id: pr_gruntovka_input
+                id: h_input
                 hint_text: 'Высота фундамента'
                 # helper_text: "Не обезательно для ввода"
                 text_color: app.text_color_button
@@ -447,12 +507,12 @@
                     root.calculate_kraska()
 
             MDTextField:
-                id: answer_pr_shpak
+                id: answer_beton
                 hint_text: 'Количество бетона в кубах:'
                 text_color: app.text_color_label
                 disabled: True
             MDTextField:
-                id: answer_pr_color
+                id: answer_pr_beton
                 hint_text: 'Общая стоимость бетона:'
                 text_color: app.text_color_label
                 disabled: True

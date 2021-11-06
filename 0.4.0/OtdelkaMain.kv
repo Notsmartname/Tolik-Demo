@@ -21,31 +21,13 @@
     text_color: 1, 1, 1, 1
     line_height: .8
 
-<BackgroundColor@Widget>
-    background_color: 1, 1, 1, 1
-    canvas.before:
-        Color:
-            rgba: root.background_color
-        Rectangle:
-            size: self.size
-            pos: self.pos
-# Now you can simply Mix the `BackgroundColor` class with almost
-# any other widget... to give it a background.
-<BackgroundLabel@MDLabel+BackgroundColor>
-    # background_color: .40, .23, .72, 1
-    # theme_text_color: 'Custom'
-    text_color: 1, 1, 1, 1
-    text_size: self.size
-    halign: 'left'
-    valign: 'middle'
-    line_height: .8
 
 # Строка для ввода данных
 <DefTextInput@MDTextField>:
     hint_text: "Введите число в см"
     # helper_text: "Только цифры"
-    helper_text_mode: "persistent"
-    text_color: app.text_color_label
+    # helper_text_mode: "persistent"
+    # text_color: app.text_color_label
 
 
 # Меню Расчет отделки помещений

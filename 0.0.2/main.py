@@ -6,10 +6,12 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.widget import Widget
 
+
 def input_numbers(value):
     numbers = []
     numbers += value
     print(numbers)
+
 
 class WindowManager(ScreenManager):
     pass
@@ -263,6 +265,18 @@ class Laminat(Popup):
             man = 0
 
         self.answer_output.text = str(kv + shi + dli + pod + sam + man)
+
+
+class VidKladki(Popup):
+    pass
+
+
+class OneBeton(Popup):
+    pass
+
+
+class ColonaPopup(Popup):
+    pass
 
 
 class TolicApp(App):

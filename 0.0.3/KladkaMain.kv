@@ -1,0 +1,133 @@
+#: import Factory kivy.factory.Factory
+
+
+<DefTabbedPanelItem@TabbedPanelItem>:
+    background_color: .19, .31, .40, 1
+    color: .82, .94, .26, 1
+
+ 
+
+# Меню Расчет кладки кирпича
+<KladkaMain>:
+    name: 'расчет кладки'
+    field: field
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+
+            padding: 10
+            spacing: 10
+
+            MDTextField:
+                id: field
+                pos_hint: {'center_x': .5, 'center_y': .6}
+                size_hint_x: None
+                width: "200dp"
+                hint_text: "Password"
+                on_focus: if self.focus: app.menu.open()
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 10
+                cols: 2
+                DefLabel:
+                    text: 'Погонаж:'
+                DefTextInput:
+                    id: kvadrat_input
+                    # text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Ширина кирпича:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Дляна кирпича:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Стоимость кирпича за штуку:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Стоимость цемента за кг'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Стоимость песка за кг:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: kvadrat_input
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_kraska()
+
+
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    text: ''
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+            # Кнопка возврата в главное меню
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                text: 'Назад'
+                # size_hint: 1, .1
+                on_release:
+                    app.root.current = 'main'
+                    root.manager.transition.direction = 'right'
+
+
+
+
+
+<VidKladki>:
+    auto_dismiss: False
+    title: 'Виды кладки'
+    size_hint: .4, .4
+    pos_hint: {'x': 0.1, 'top': .9}
+    BoxLayout:
+        orientation: 'vertical'
+        DefButton:
+            text: 'Перегародка'
+        DefButton:
+            text: 'Несущея стена'
+        DefButton:
+            text: 'Колонна'
+        DefButton:
+            text: 'Назад'
+            on_press:
+                root.dismiss()
+
+
+<IconListItem>
+
+    IconLeftWidget:
+        icon: root.icon

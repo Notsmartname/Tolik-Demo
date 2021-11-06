@@ -1,0 +1,397 @@
+#: import Factory kivy.factory.Factory
+
+# Меню Расчет укладки пола
+<PolMain>:
+    name: 'расчет полов'
+
+    MDToolbar:
+        title: 'Расчет полов'
+        pos_hint: {"top": 1}
+        elevation: 10
+        theme_text_color: "Custom"
+        text_color: .82, .94, .26, 1
+
+    BoxLayout:
+        pos_hint_y: {'top': 1}
+        orientation: 'vertical'
+        spacing: 10
+        BoxLayout:
+
+            orientation: 'vertical'
+            spacing: 10
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                text: '       Кафель       '
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Кафель'
+                    root.manager.transition.direction = 'left'
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                text: 'Ламинат'
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Ламинат'
+                    root.manager.transition.direction = 'left'
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                text: 'Паркет'
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Паркет'
+                    root.manager.transition.direction = 'left'
+
+        # Кнопка возврата в главное меню
+        MDFillRoundFlatButton:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            text: 'Назад'
+            # size_hint: 1, .1
+            on_release:
+                app.root.current = 'main'
+                root.manager.transition.direction = 'right'
+
+        MDBottomAppBar:
+
+            MDToolbar:
+                icon: 'arrow-up-circle' # 'arrow-down-circle'
+                type: 'bottom'
+                halign: 'free-end'
+
+# Меню расчета Кафель
+<Cafel>:
+    name: 'Кафель'
+    auto_dismiss: False
+    title: 'Кафель'
+
+    kvadrat_input: kvadrat_input
+    shirina_cafel_input: shirina_cafel_input
+    dlina_cafel_input: dlina_cafel_input
+    kley_input: kley_input
+    pr_gruntovka_input: pr_gruntovka_input
+    workmans_input: workmans_input
+    fuga_input: fuga_input
+
+    answer_cafel: answer_cafel
+    answer_kley: answer_kley
+    answer_pr_gruntovka: answer_pr_gruntovka
+    answer_fuga: answer_fuga
+    answer_output: answer_output
+
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            padding: 10
+            spacing: 10
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 10
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Ширина кафеля:'
+                DefTextInput:
+                    id: shirina_cafel_input
+                DefLabel:
+                    text: 'Длинна кафеля:'
+                DefTextInput:
+                    id: dlina_cafel_input
+                DefLabel:
+                    text: 'Стоимость клея за кг:'
+                DefTextInput:
+                    id: kley_input
+                DefLabel:
+                    text: 'Стоимость грунтовки за литр:'
+                DefTextInput:
+                    id: pr_gruntovka_input
+                DefLabel:
+                    text: 'Стоимость фуги за кг:'
+                DefTextInput:
+                    id: fuga_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            BoxLayout:
+                orientation: 'vertical'
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_cafel()
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество кафеля:'
+                DefLabel:
+                    id: answer_cafel
+                DefLabel:
+                    text: 'Количество клея:'
+                DefLabel:
+                    id: answer_kley
+                DefLabel:
+                    text: 'Количество грунтовки:'
+                DefLabel:
+                    id: answer_pr_gruntovka
+                DefLabel:
+                    text: 'Количество фуги:'
+                DefLabel:
+                    id: answer_fuga
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет полов'
+                    root.manager.transition.direction = 'right'
+
+# Меню расчета Ламинат
+<Laminat>:
+    name: 'Ламинат'
+    auto_dismiss: False
+    title: 'Ламинат'
+
+    kvadrat_input: kvadrat_input
+    shirina_laminat_input: shirina_laminat_input
+    dlina_laminat_input: dlina_laminat_input
+    podstilka_input: podstilka_input
+    samorezi_input: samorezi_input
+    workmans_input: workmans_input
+
+    answer_output: answer_output
+    answer_output: answer_output
+    answer_laminat: answer_laminat
+    answer_podstilka: answer_podstilka
+    answer_samorezi: answer_samorezi
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            padding: 10
+            spacing: 10
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 10
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Ширина ламината:'
+                DefTextInput:
+                    id: shirina_laminat_input
+                DefLabel:
+                    text: 'Длинна ламината:'
+                DefTextInput:
+                    id: dlina_laminat_input
+                DefLabel:
+                    text: 'Стоимость подстилки:'
+                DefTextInput:
+                    id: podstilka_input
+                DefLabel:
+                    text: 'Стоимость саморезов за кг:'
+                DefTextInput:
+                    id: samorezi_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            BoxLayout:
+                orientation: 'vertical'
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_laminat()
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество ламината:'
+                DefLabel:
+                    id: answer_laminat
+                DefLabel:
+                    text: 'Количество подстилки:'
+                DefLabel:
+                    id: answer_podstilka
+                DefLabel:
+                    text: 'Количество саморезов:'
+                DefLabel:
+                    id: answer_samorezi
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет полов'
+                    root.manager.transition.direction = 'right'
+
+ # Меню расчета Паркет
+<Parkent>:
+    name: 'Паркет'
+    auto_dismiss: False
+    title: 'Паркет'
+
+    kvadrat_input: kvadrat_input
+    shirina_parket_input: shirina_parket_input
+    dlina_parket_input: dlina_parket_input
+    podstilka_input: podstilka_input
+    samorezi_input: samorezi_input
+    workmans_input: workmans_input
+
+    answer_output: answer_output
+    answer_parket: answer_parket
+    answer_podstilka: answer_podstilka
+    answer_samorezi: answer_samorezi
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            padding: 10
+            spacing: 10
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 10
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                DefLabel:
+                    text: 'Ширина паркета:'
+                DefTextInput:
+                    id: shirina_parket_input
+                DefLabel:
+                    text: 'Длинна паркета:'
+                DefTextInput:
+                    id: dlina_parket_input
+                DefLabel:
+                    text: 'Стоимость подстилки:'
+                DefTextInput:
+                    id: podstilka_input
+                DefLabel:
+                    text: 'Стоимость саморезов за кг:'
+                DefTextInput:
+                    id: samorezi_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            BoxLayout:
+                orientation: 'vertical'
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_parkent()
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество паркета:'
+                DefLabel:
+                    id: answer_parket
+                DefLabel:
+                    text: 'Количество подстилки:'
+                DefLabel:
+                    id: answer_podstilka
+                DefLabel:
+                    text: 'Количество саморезов:'
+                DefLabel:
+                    id: answer_samorezi
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет полов'
+                    root.manager.transition.direction = 'right'

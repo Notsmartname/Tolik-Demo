@@ -1,0 +1,420 @@
+#: import md_icons kivymd.icon_definitions.md_icons
+#: import fonts kivymd.font_definitions.fonts
+
+#: import Factory kivy.factory.Factory
+#: include OtdelkaMain.kv
+#: include BetonMain.kv
+#: include KladkaMain.kv
+#: include PolMain.kv
+#: include Calculator.kv
+
+#: import environ os.environ
+#: import gch kivy.utils.get_color_from_hex
+#: import GlobalMain lib.baseclass.global_main.GlobalMain
+#: import OtdelkaMain lib.baseclass.otdelka_main.OtdelkaMain
+#: import OtdelkaFirst lib.baseclass.otdelka_main.OtdelkaFirst
+#: import OtdelkaSecend lib.baseclass.otdelka_main.OtdelkaSecend
+#: import OtdelkaThird lib.baseclass.otdelka_main.OtdelkaThird
+#: import OtdelkaFourth lib.baseclass.otdelka_main.OtdelkaFourth
+
+#: import Calculator lib.baseclass.calculator.Calculator
+
+#: import BetonMain lib.baseclass.beton.BetonMain
+#: import OneBeton lib.baseclass.beton.OneBeton
+#: import TwoBeton lib.baseclass.beton.TwoBeton
+#: import TreeBeton lib.baseclass.beton.TreeBeton
+#: import FourBeton lib.baseclass.beton.FourBeton
+
+#: import PolMain lib.baseclass.pol_main.PolMain
+#: import Cafel lib.baseclass.pol_main.Cafel
+#: import Laminat lib.baseclass.pol_main.Laminat
+#: import Parkent lib.baseclass.pol_main.Parkent
+
+
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
+
+<DefButton@Button>:
+    background_color: .19, .31, .40, 1
+    color: .82, .94, .26, 1
+# Надпись для ввода данных
+<DefLabel@MDLabel>:
+    # halign: 'center'
+    size: self.texture_size
+    #theme_text_color: 'Custom'
+    # text_color: .82, .94, .26, 1
+    # text_color: app.text_color_label
+    line_height: .8
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# Строка для ввода данных
+<DefTextInput@MDTextField>:
+    # hint_text: "Введите число в см"
+    # helper_text: "Только цифры"
+    # helper_text_mode: "persistent"
+    # text_color: app.text_color_label
+    input_type: 'number'
+    input_filter: 'int'
+
+<DefLabel@MDLabel>:
+    # halign: 'center'
+    size: self.texture_size
+    theme_text_color: 'Custom'
+    # text_color: .82, .94, .26, 1
+    # text_color: 0, 0, 0, 1
+    line_height: .8
+
+<GlobalMain>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+
+
+
+    MDLabel:
+        text: app.title
+        font_style: "Button"
+        adaptive_height: True
+        height: self.texture_size[1]
+
+    ScrollView:
+
+        DrawerList:
+            id: md_list
+            OneLineIconListItem:
+                text: "My files"
+                on_release: app.file_manager_open()
+                IconLeftWidget:
+                    icon: "folder"
+
+            OneLineIconListItem:
+                text: "Калькулятор"
+                on_release:
+                    Factory.Calculator().open()
+                IconLeftWidget:
+                    icon: "calculator"
+            OneLineIconListItem:
+                text: "Тема светлая/темная"
+                on_release:
+                    app.switch_theme_style()
+                IconLeftWidget:
+                    icon: "theme-light-dark"
+            OneLineIconListItem:
+                text: "Обновить"
+                IconLeftWidget:
+                    icon: "upload"
+
+<ItemConfirm>
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
+
+        MDLabel:
+            text: 'Theme:'
+            pos_hint: {'center_x': .1}
+
+
+MDScreen:
+
+    MDNavigationLayout:
+
+        ScreenManager:
+
+            MDScreen:
+
+                MDBoxLayout:
+
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: app.title
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        right_action_items: [["calculator", lambda x: Factory.Calculator().open()]]
+                        md_bg_color: app.set_md_bg_color
+                        # opposite_colors: True
+
+
+                    MDTabs:
+                        id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        height: '48dp'
+                        background_color: 0.1, 0.1, 0.1, 1
+                        # анимация индекатора
+                        tab_indicator_anim: False
+                        tab_indicator_type: "line-round"                        
+                        indicator_color: 1, 1, 1, 1
+                        
+
+                        Tab:
+                            id: tab1
+                            name: 'отделка поверхностей'
+                            text: f"[ref={'Отделка поверхностей'}][font={fonts[-1]['fn_regular']}]{md_icons['format-paint']}[/font][/ref]  {'Отделка поверхностей'}"
+                            OtdelkaMain:
+                                
+
+                        Tab:
+                            id: tab2
+                            name: 'бетон'
+                            text: f"[ref={'Бетон'}][font={fonts[-1]['fn_regular']}]{md_icons['view-compact']}[/font][/ref]  {'Бетон'}"
+
+                            BetonMain:
+
+                        Tab:
+                            id: tab3
+                            name: 'расчет кладки'
+                            text: f"[ref={'Кирпичная кладка'}][font={fonts[-1]['fn_regular']}]{md_icons['wall']}[/font][/ref]  {'Кирпичная кладка'}"
+
+
+
+                            ScrollView:
+                                do_scroll_x: False
+                                do_scroll_y: True
+
+                                BoxLayout:
+                                    height: '1200sp'
+                                    orientation: 'vertical'
+                                    size_hint_y: None
+
+                                    padding: 10
+                                    spacing: 10
+
+                                    GridLayout:
+                                        size_hint_y: None
+                                        spacing: '24dp'
+                                        cols: 1
+
+                                        MDDropDownItem:
+                                            id: kladka
+                                            size_hint_x: None
+                                            width: '200dp'
+                                            text: 'Вид кладки'
+                                            on_release: app.menu.open()
+
+                                        MDDropDownItem:
+                                            id: kirpich
+                                            size_hint_x: None
+                                            width: '200dp'
+                                            text: 'Размер кирпича'
+                                            on_release: app.menu2.open()
+
+
+                                        MDTextField:
+                                            id: kvadrat_input
+                                            helper_text: "Расчет в м2"
+                                            hint_text: 'Квадратура:'
+                                            valign: 'top'
+                                            helper_text_mode: "on_focus"
+                                            text_color: app.text_color_label
+                                            hint_text_color_normal: app.text_color_label
+
+                                        MDBoxLayout:
+                                            cols: 2
+                                            orientation: 'horizontal'
+                                            spacing: 25
+
+                                            MDLabel:
+                                                text: 'Учитовать швы'
+
+                                            MDCheckbox:
+                                                size_hint: None, None
+                                                size: "48dp", "48dp"
+                                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                                on_active: app.on_checkbox_active(*args)
+
+                                        GridLayout:
+                                            size_hint_y: None
+                                            spacing: 15
+                                            cols: 1
+
+                                            MDTextField:
+                                                id: kirpich_input                                               
+                                                hint_text: 'Стоимость кирпича за штуку:'
+                                                text_color: app.text_color_label
+                                                hint_text_color_normal: app.text_color_label
+
+                                            DefTextInput:
+                                                id: tsement_input
+                                                helper_text: "Не обезательно для ввода"
+                                                hint_text: 'Стоимость раствора кладочеого за м3'
+                                                helper_text_mode: "on_focus"
+                                                text_color: app.text_color_label
+                                              
+                                            DefTextInput:
+                                                id: setka_input
+                                                helper_text: "За 1 кг веса, при высоте стены до 4м"
+                                                helper_text_mode: "on_focus"
+                                                hint_text: 'Стоимость сетки кладочной'
+                                                text_color: app.text_color_label
+
+
+                                    MDBoxLayout:
+
+                                        MDRoundFlatButton:
+                                            # size_hint: 1, .1
+                                            theme_text_color: 'Custom'
+                                            text_color: app.text_color_button
+                                            line_color: app.text_color_button
+                                            # pos_hint: {'center_x': .5}
+                                            text: '    Посчитать    '
+                                            on_press:
+                                                app.calculate_kladka()
+
+                                    GridLayout:
+                                        size_hint: 1, .75
+                                        cols: 1
+                                        DefTextInput:
+                                            id: answer_output
+                                            hint_text: 'Общая стоимость материалов:'
+                                            text_color: app.text_color_label
+                                            disabled: True
+
+                                        DefTextInput:
+                                            id: col_rostvor
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Количество раствора:'
+
+                                        DefTextInput:
+                                            id: col_pr_rostvor
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Стоимость раствора:'
+
+                                        DefTextInput:
+                                            id: col_setki
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Количество кладочной сетки:'
+
+                                        DefTextInput:
+                                            id: col_pr_setki
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Стоимость кладочной сетки:'
+
+                                        DefTextInput:
+                                            id: col_kirpich
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Количество кирпичей:'
+
+                                        DefTextInput:
+                                            id: col_pr_kirpich
+                                            disabled: True
+                                            text_color: app.text_color_label
+                                            hint_text: 'Стоимость кирпичей:'
+
+                        Tab:
+                            id: tab4
+                            name: 'расчет пола'
+                            text: 'Пол'
+
+
+                            ScrollView:
+                                do_scroll_x: False
+                                do_scroll_y: True
+
+                                MDList:
+
+                                    GridLayout:
+                                        height: '550sp'
+                                        # orientation: 'vertical'
+                                        size_hint_y: None
+                                        cols: 1
+                                        padding: 10
+                                        spacing: 10
+
+
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+
+                                            MDDropDownItem:
+                                                id: pol
+                                                size_hint_x: None
+                                                width: '200dp'
+                                                text: 'Тип покрытия'
+                                                on_release: app.menu3.open()
+
+                                            DefTextInput:
+                                                id: shirina
+                                                text: 'Ширина пола'
+                                                helper_text_mode: "on_focus"
+                                                helper_text: 'Еденица измерения метр'
+                                            DefTextInput:
+                                                id: dlina
+                                                text: 'Длина пола'
+                                                helper_text_mode: "on_focus"
+                                                helper_text: 'Еденица измерения метр'
+                                            DefTextInput:
+                                                id: shirina_pok
+                                                text: 'Ширина покрытия'
+                                                helper_text_mode: "on_focus"
+                                                helper_text: 'Еденица измерения метр'
+                                            DefTextInput:
+                                                id: dlina_pok
+                                                text: 'Длина покрытия'
+                                                helper_text_mode: "on_focus"
+                                                helper_text: 'Еденица измерения метр'
+                                            DefTextInput:
+                                                id: pr_pok
+                                                text: 'Цена:'
+                                                helper_text_mode: "on_focus"
+                                                helper_text: 'За один м2'
+
+                                            MDBoxLayout:
+
+                                                MDRoundFlatButton:
+                                                    # size_hint: 1, .1
+                                                    theme_text_color: 'Custom'
+                                                    text_color: app.text_color_button
+                                                    line_color: app.text_color_button
+                                                    # pos_hint: {'center_x': .5}
+                                                    text: '    Посчитать    '
+                                                    on_press:
+                                                        app.calculate_pol(*args)
+
+                                            GridLayout:
+                                                size_hint_y: None
+                                                cols: 1
+                                                DefTextInput:
+                                                    id: answer_output
+                                                    hint_text: 'Общая стоимость материалов:'
+                                                    text_color: app.text_color_label
+                                                    disabled: True
+
+                                                DefTextInput:
+                                                    id: col_pol
+                                                    disabled: True
+                                                    text_color: app.text_color_label
+                                                    hint_text: 'Количество материалова:'
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            GlobalMain:
+                id: content_drawer
+

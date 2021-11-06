@@ -6,7 +6,7 @@
 #: include BetonMain.kv
 #: include KladkaMain.kv
 #: include PolMain.kv
-#: include Beton.kv
+#: include Calculator.kv
 
 #: import environ os.environ
 #: import gch kivy.utils.get_color_from_hex
@@ -31,9 +31,9 @@
 <DefLabel@MDLabel>:
     # halign: 'center'
     size: self.texture_size
-    theme_text_color: 'Custom'
+    #theme_text_color: 'Custom'
     # text_color: .82, .94, .26, 1
-    text_color: app.text_color_label
+    # text_color: app.text_color_label
     line_height: .8
 
 <BackgroundColor@Widget>
@@ -57,10 +57,12 @@
 
 # Строка для ввода данных
 <DefTextInput@MDTextField>:
-    hint_text: "Введите число в см"
-    helper_text: "Только цифры"
-    helper_text_mode: "persistent"
-    # text_color: 1, 1, 1, 1
+    # hint_text: "Введите число в см"
+    # helper_text: "Только цифры"
+    # helper_text_mode: "persistent"
+    # text_color: app.text_color_label
+    input_type: 'number'
+    input_filter: 'int'
 
 <DefLabel@MDLabel>:
     # halign: 'center'
@@ -87,13 +89,6 @@
         adaptive_height: True
         height: self.texture_size[1]
 
-
-
-#    MDLabel:
-#        text: "kivydevelopment@gmail.com"
-#        font_style: "Caption"
-#        adaptive_height: True
-
     ScrollView:
 
         DrawerList:
@@ -106,16 +101,14 @@
 
             OneLineIconListItem:
                 text: "Калькулятор"
+                on_release:
+                    Factory.Calculator().open()
                 IconLeftWidget:
                     icon: "calculator"
             OneLineIconListItem:
                 text: "Тема светлая/темная"
-                # id: box
-                # adaptive_height: True
                 on_release:
                     app.switch_theme_style()
-                    # app.show_confirmation_dialog()
-                    # Factory.Diolog().open()
                 IconLeftWidget:
                     icon: "theme-light-dark"
             OneLineIconListItem:
@@ -134,10 +127,6 @@
             text: 'Theme:'
             pos_hint: {'center_x': .1}
 
-<MyTile@SmartTileWithLabel>
-    size_hint_y: None
-    height: "240dp"
-
 
 MDScreen:
 
@@ -155,7 +144,7 @@ MDScreen:
                         title: app.title
                         elevation: 10
                         left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
-                        right_action_items: [['star-outline', lambda x: app.on_star_click()]]
+                        right_action_items: [["calculator", lambda x: Factory.Calculator().open()]]
                         md_bg_color: app.set_md_bg_color
                         # opposite_colors: True
 
@@ -181,6 +170,7 @@ MDScreen:
                             id: tab2
                             name: 'бетон'
                             text: f"[ref={'Бетон'}][font={fonts[-1]['fn_regular']}]{md_icons['view-compact']}[/font][/ref]  {'Бетон'}"
+
                             BetonMain:
 
                         Tab:
@@ -195,7 +185,7 @@ MDScreen:
                                 do_scroll_y: True
 
                                 BoxLayout:
-                                    height: '1010sp'
+                                    height: '850sp'
                                     orientation: 'vertical'
                                     size_hint_y: None
 
@@ -203,62 +193,79 @@ MDScreen:
                                     spacing: 10
 
                                     GridLayout:
-                                        size_hint_y: .35
-                                        spacing: 10
+                                        size_hint_y: None
+                                        spacing: '24dp'
                                         cols: 1
 
-                                        MDTextField:
-                                            id: field
+                                        MDDropDownItem:
+                                            id: kladka
                                             size_hint_x: None
                                             width: '200dp'
-                                            hint_text: 'Вид кладки'
-                                            on_focus: if self.focus: app.menu.open()
- 
-                                        DefTextInput:
-                                            id: pogonash_input
-                                            helper_text: "Обезательно для ввода"
-                                            hint_text: 'Погонаж:'
-                                            text_color: app.text_color_label
-                                            text_color_normal: app.text_color_label
-                                            line_color_focus: app.text_color_label
+                                            text: 'Вид кладки'
+                                            on_release: app.menu.open()
 
-                                        DefTextInput:
-                                            id: shirina_input
-                                            helper_text: "Обезательно для ввода"
-                                            hint_text: 'Ширина кирпича:'
-                                            text_color: app.text_color_label
+                                        MDDropDownItem:
+                                            id: kirpich
+                                            size_hint_x: None
+                                            width: '200dp'
+                                            text: 'Размер кирпича'
+                                            on_release: app.menu2.open()
 
-                                        DefTextInput:
-                                            id: dlina_input
-                                            helper_text: "Обезательно для ввода"
-                                            hint_text: 'Дляна кирпича:'
-                                            text_color: app.text_color_label
 
-                                        DefTextInput:
-                                            id: kirpich_input
-                                            helper_text: "Не обезательно для ввода"
-                                            hint_text: 'Стоимость кирпича за штуку:'
+                                        MDTextField:
+                                            id: kvadrat_input
+                                            helper_text: "Выберите вид кладки"
+                                            hint_text: 'Квадратура:'
+                                            valign: 'top'
                                             text_color: app.text_color_label
+                                            hint_text_color_normal: app.text_color_label
 
-                                        DefTextInput:
-                                            id: tsement_input
-                                            helper_text: "Не обезательно для ввода"
-                                            hint_text: 'Стоимость цемента за кг'
-                                            text_color: app.text_color_label
+                                        MDBoxLayout:
+                                            cols: 2
+                                            orientation: 'horizontal'
+                                            spacing: 25
 
-                                        DefTextInput:
-                                            id: pesok_input
-                                            helper_text: "Не обезательно для ввода"
-                                            hint_text: 'Стоимость песка за кг:'
-                                            text_color: app.text_color_label
-                                            
+                                            MDLabel:
+                                                text: 'Учитовать швы'
 
-                                        DefTextInput:
-                                            id: workmans_input
-                                            helper_text: "Не обезательно для ввода"
-                                            hint_text: 'Количество рабочих:'
-                                            text_color: app.text_color_label
+                                            MDCheckbox:
+                                                size_hint: None, None
+                                                size: "48dp", "48dp"
+                                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                                on_active: app.on_checkbox_active(*args)
 
+                                        GridLayout:
+                                            size_hint_y: None
+                                            spacing: 15
+                                            cols: 1
+
+                                            DefTextInput:
+                                                id: shov_input
+                                                # helper_text: "Обезательно для ввода"
+                                                hint_text: 'Растворачный шов:'
+                                                text_color: app.text_color_label
+                                                hint_text_color_normal: app.text_color_label
+                                                line_color_focus: app.text_color_label
+
+                                            DefTextInput:
+                                                id: kirpich_input
+                                                helper_text: "Обезательно для ввода"
+                                                hint_text: 'Стоимость кирпича за штуку:'
+                                                text_color: app.text_color_label
+                                                hint_text_color_normal: app.text_color_label
+                                                line_color_focus: app.text_color_label
+
+                                            DefTextInput:
+                                                id: tsement_input
+                                                helper_text: "Не обезательно для ввода"
+                                                hint_text: 'Стоимость раствора кладочеого за м/куб'
+                                                text_color: app.text_color_label
+                                              
+                                            DefTextInput:
+                                                id: setka_input
+                                                helper_text: "Не обезательно для ввода"
+                                                hint_text: 'Стоимость сетки арматурной'
+                                                text_color: app.text_color_label
 
                                     BoxLayout:
                                         orientation: 'horizontal'
@@ -273,7 +280,7 @@ MDScreen:
                                             # pos_hint: {'center_x': .5}
                                             text: '    Посчитать    '
                                             on_press:
-                                                app.calculate_kladka(*args)
+                                                app.calculate_kladka()
 
                                         MDRoundFlatButton:
                                             # size_hint: 1, .1
@@ -295,11 +302,11 @@ MDScreen:
                                             disabled: True
 
                                         DefTextInput:
-                                            # valign: 'middle'
+                                            id: col_kirpich
                                             disabled: True
                                             text_color: app.text_color_label
-                                            hint_text: 'Примерное время на выполнеие работ:'
-                                            helper_text: 'Выведется если графа "Количество рабочих" заполнено'
+                                            hint_text: 'Количество кирпичей:'
+                                            
 
                                     # Кнопка возврата в главное меню
                                     # MDFillRoundFlatButton:
@@ -325,3 +332,12 @@ MDScreen:
                 id: content_drawer
 
 
+
+#    size_hint_y: None
+#    height: '240dp'
+#    MDTextField:
+#        hint_text: 'Start'
+#
+#    MDRoundFlatButton:
+#        text: 'Woood'
+#

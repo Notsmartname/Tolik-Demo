@@ -1,0 +1,218 @@
+#: import Factory kivy.factory.Factory
+# BetonMain:
+
+
+# Меню Расчет бетона
+<BetonMain>:
+    name: 'расчет бетона'
+
+    MDToolbar:
+        title: 'Расчет отделки стен'
+        pos_hint: {"top": 1}
+        elevation: 10
+        theme_text_color: "Custom"
+        text_color: .82, .94, .26, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint_y: {'top': 1}
+        # size: root.width, root.height
+        padding: 10
+        spacing: 10
+
+        BoxLayout:
+            spacing: 5
+            orientation: 'vertical'
+
+            MDFillRoundFlatButton:
+                text: 'Фундамент (не готов)'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Ленточный фундамент'
+                    root.manager.transition.direction = 'left'
+            MDFillRoundFlatButton:
+                text: 'Колонна'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Колонна'
+                    root.manager.transition.direction = 'left'
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+                text: 'Плита'
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+
+
+
+            # Кнопка возврата в главное меню
+        MDRoundFlatButton:
+            text: 'Назад'
+            # size_hint: 1, .1
+            line_color: 0, 0, 0, 1
+            theme_text_color: 'Custom'
+            text_color: .82, .94, .26, 1
+            pos_hint: {'center_x': .5, 'center_y': 1}
+            on_release:
+                app.root.current = 'main'
+                root.manager.transition.direction = 'right'
+
+        MDBottomAppBar:
+
+            MDToolbar:
+                icon: 'arrow-up-circle' # 'arrow-down-circle'
+                type: 'bottom'
+                halign: 'free-end'
+
+<OneBeton>:
+    name: 'Ленточный фундамент'
+
+    BoxLayout:
+        cols: 2
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 10
+        spacing: 10
+
+
+        Button:
+            background_normal: 'Two.png'
+
+        MDRoundFlatButton:
+            text: 'Назад'
+            # size_hint: 1, .1
+            line_color: 0, 0, 0, 1
+            theme_text_color: 'Custom'
+            text_color: .82, .94, .26, 1
+            pos_hint: {'center_x': .5, 'center_y': 1}
+            on_press:
+                app.root.current = 'расчет бетона'
+                root.manager.transition.direction = 'right'
+<ColonaBeton>:
+    name: 'Колонна'
+
+    kvadrat_input: kvadrat_input
+    shirina_input: shirina_input
+    visota_input: visota_input
+    pr_tsement_input: pr_tsement_input
+    pr_pesok_input: pr_pesok_input
+    pr_sheben_input: pr_sheben_input
+    workmans_input: workmans_input
+
+    answer_pr_oboi: answer_pr_oboi
+    answer_pr_gruntovka: answer_pr_gruntovka
+    answer_pr_shkur: answer_pr_shkur
+    answer_output: answer_output
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 5
+                cols: 2
+                DefLabel:
+                    text: 'Количество:'
+                DefTextInput:
+                    id: kvadrat_input
+                    # text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Ширина:'
+                DefTextInput:
+                    id: shirina_input
+                DefLabel:
+                    text: 'Высота:'
+                DefTextInput:
+                    id: visota_input
+                DefLabel:
+                    text: 'Стоимость цемент за кг:'
+                DefTextInput:
+                    id: pr_tsement_input
+                DefLabel:
+                    text: 'Стоимость песок за кг:'
+                DefTextInput:
+                    id: pr_pesok_input
+                DefLabel:
+                    text: 'Стоимость щебня за кг:'
+                DefTextInput:
+                    id: pr_sheben_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            MDRoundFlatButton:
+                # size_hint: 1, .1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                line_color: 0, 0, 0, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                text: '    Посчитать    '
+                on_press:
+                    root.calculate_kraska()
+
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество цемента:'
+                DefLabel:
+                    id: answer_pr_oboi
+                DefLabel:
+                    text: 'Количество песока:'
+                DefLabel:
+                    id: answer_pr_gruntovka
+                DefLabel:
+                    text: 'Количество щебня:'
+                DefLabel:
+                    id: answer_pr_shkur
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет бетона'
+                    root.manager.transition.direction = 'right'
+
+<KarkasArm@Popup>:
+    auto_dismiss: False
+    title: 'Каркас'
+    size_hint: .4, .4
+
+    BoxLayout:
+
+        Button:
+            text: 'Назад'
+            size_hint: 1, .2
+            on_release:
+                root.dismiss()

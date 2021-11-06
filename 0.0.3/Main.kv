@@ -1,0 +1,126 @@
+#: import Factory kivy.factory.Factory
+#: include OtdelkaMain.kv
+#: include BetonMain.kv
+#: include KladkaMain.kv
+#: include PolMain.kv
+
+WindowManager:
+    GlobalMain:
+    OtdelkaMain:
+    OtdelkaFirst:
+    OtdelkaSecend:
+    OtdelkaThird:
+    OtdelkaFourth:
+    BetonMain:
+    ColonaBeton:
+    OneBeton:
+    KladkaMain:
+    PolMain:
+    Cafel:
+    Laminat:
+    Parkent:
+
+
+<GlobalMain>:
+    name: 'main'
+    # Шапка меню
+    MDToolbar:
+        title: 'Главное меню'
+        pos_hint: {"top": 1}
+        elevation: 10
+        theme_text_color: "Custom"
+        text_color: .82, .94, .26, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        pos: '1dp', '200dp'
+        spacing: 10
+
+        MDFillRoundFlatButton:
+            text: '      Расчет отделки стен      '
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            theme_text_color: "Custom"
+            text_color: .82, .94, .26, 1
+            font_size: '20sp'
+            on_release:
+                app.root.current = 'расчет отделки'
+                root.manager.transition.direction = 'left'
+
+        MDFillRoundFlatButton:
+            text: '             Расчет бетона            '
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            theme_text_color: "Custom"
+            text_color: .82, .94, .26, 1
+            font_size: '20sp'
+            on_release:
+                app.root.current = 'расчет бетона'
+                root.manager.transition.direction = 'left'
+
+        MDFillRoundFlatButton:
+            text: '             Расчет кладки            '
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            theme_text_color: "Custom"
+            text_color: .82, .94, .26, 1
+            font_size: '20sp'
+            on_release:
+                app.root.current = 'расчет кладки'
+                root.manager.transition.direction = 'left'
+        MDFillRoundFlatButton:
+            text: '              Расчет полов             '
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            theme_text_color: "Custom"
+            text_color: .82, .94, .26, 1
+            font_size: '20sp'
+            on_release:
+                app.root.current = 'расчет полов'
+                root.manager.transition.direction = 'left'
+
+#    MDIconButton:
+#        icon: 'arrow-up-circle' # 'arrow-down-circle'
+#        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+#        user_font_size: '50dp'
+#        theme_text_color: "Custom"
+#        text_color: .40, .23, .72, 1
+#        on_release: app.show_example_custom_bottom_sheet()
+
+    MDBottomAppBar:
+
+        MDToolbar:
+            icon: 'arrow-up-circle'
+            type: 'bottom'
+            mode: 'center'
+            on_action_button: app.show_example_custom_bottom_sheet()
+
+
+
+
+
+<ItemForCustomBottomSheet@OneLineIconListItem>
+    on_press: app.custom_sheet.dismiss()
+    icon: ""
+
+    IconLeftWidget:
+        icon: root.icon
+
+<ContentCustomSheet@BoxLayout>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: "400dp"
+
+    MDToolbar:
+        title: 'Custom bottom sheet:'
+#        elevation: 10
+
+    ScrollView:
+
+        MDGridLayout:
+            cols: 1
+#            adaptive_height: True
+
+            ItemForCustomBottomSheet:
+                icon: "page-previous"
+                #text: "Preview"
+
+            ItemForCustomBottomSheet:
+                icon: "exit-to-app"
+                #text: "Exit"

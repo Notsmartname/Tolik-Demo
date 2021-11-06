@@ -1,0 +1,251 @@
+            BoxLayout:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                orientation: 'vertical'
+                spacing: 10
+        #        background_color: 1, 1, 1, 1
+                BoxLayout:
+
+                    orientation: 'vertical'
+                    spacing: 10
+                    MDFillRoundFlatButton:
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                        text: '        Покраска         '
+                        theme_text_color: "Custom"
+                        text_color: app.menu_text_color_button
+                        md_bg_color: app.set_md_bg_color
+                        font_size: '20sp'
+                        on_release:
+        #                    app.root.current = 'Покраска стен'
+        #                    root.manager.transition.direction = 'left'
+                            Factory.OtdelkaFirst().open()
+                    MDFillRoundFlatButton:
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                        text: '            Обои              '
+                        theme_text_color: "Custom"
+                        text_color: 0,0,0,1# app.menu_text_color_button
+                        md_bg_color: app.set_md_bg_color
+                        font_size: '20sp'
+                        on_release:
+        #                    app.root.current = 'Обои'
+        #                    root.manager.transition.direction = 'left'
+                            Factory.OtdelkaSecend().open()
+                    MDFillRoundFlatButton:
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                        text: '       Облицофка       '
+                        theme_text_color: "Custom"
+                        text_color: app.menu_text_color_button
+                        md_bg_color: app.set_md_bg_color
+                        font_size: '20sp'
+                        on_release:
+        #                    app.root.current = 'Облицовка'
+        #                    root.manager.transition.direction = 'left'
+                            Factory.OtdelkaThird().open()
+                    MDFillRoundFlatButton:
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                        text: '      Штукатурка       '
+                        theme_text_color: "Custom"
+                        text_color: app.menu_text_color_button
+                        md_bg_color: app.set_md_bg_color
+                        font_size: '20sp'
+                        on_release:
+        #                    app.root.current = 'Штукатурка'
+        #                    root.manager.transition.direction = 'left'
+                            Factory.OtdelkaFourth().open()
+
+
+
+# Строка для ввода данных
+<DefTextInput@MDTextField>:
+    hint_text: "Введите число в см"
+    helper_text: "Только цифры"
+    helper_text_mode: "persistent"
+    text_color: 1, 1, 1, 1
+
+<DefLabel@MDLabel>:
+    # halign: 'center'
+    size: self.texture_size
+    theme_text_color: 'Custom'
+    # text_color: .82, .94, .26, 1
+    text_color: 0, 0, 0, 1
+    line_height: .8
+
+<GlobalMain>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+
+
+
+    MDLabel:
+        text: app.title
+        font_style: "Button"
+        adaptive_height: True
+        height: self.texture_size[1]
+
+
+
+#    MDLabel:
+#        text: "kivydevelopment@gmail.com"
+#        font_style: "Caption"
+#        adaptive_height: True
+
+    ScrollView:
+
+        DrawerList:
+            id: md_list
+
+MDScreen:
+
+    MDNavigationLayout:
+
+        ScreenManager:
+
+            MDScreen:
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        title: app.title
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        right_action_items: [['star-outline', lambda x: app.on_star_click()]]
+                        md_bg_color: 0, 0, 0, 1
+
+                    MDTabs:
+                        id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        height: '48dp'
+                        tab_indicator_anim: False
+                        background_color: 0.1, 0.1, 0.1, 1
+
+                        Tab:
+                            id: tab1
+                            name: 'tab1'
+                            # Исравить здесь
+                            text: 'Nothing' #f'[size=20][fonts={fonts[-1]["fn_regular"]}]{md_icons["format-paint"]}[/size][/font] Input'
+                            OtdelkaMain:
+
+                        Tab:
+                            id: tab2
+                            name: 'tab2'
+                            text: 'Nothing'
+
+                        Tab:
+                            id: tab3
+
+                            text: 'Nothing'
+                            name: 'расчет кладки'
+
+
+
+                            ScrollView:
+                                do_scroll_x: False
+                                do_scroll_y: True
+
+                                BoxLayout:
+                                    height: '900sp'
+                                    orientation: 'vertical'
+                                    size_hint_y: None
+
+                                    padding: 10
+                                    spacing: 10
+
+                                    GridLayout:
+                                        size_hint_y: .35
+                                        spacing: 10
+                                        cols: 2
+
+                                        MDTextField:
+                                            id: field
+                                            size_hint_x: None
+                                            width: '200dp'
+                                            hint_text: 'HERE'
+                                            on_focus: if self.focus: app.menu.open()
+
+                                        DefLabel:
+                                            text_color: 0, 0, 0, 1
+                                            text: 'Погонаж:'
+                                        DefTextInput:
+                                            id: kvadrat_input
+                                            helper_text: "Только цифры"
+                                            hint_text: 'Стоимость шкурки за метр:'
+                                        DefLabel:
+                                            text: 'Ширина кирпича:'
+                                        DefTextInput:
+                                            id: kvadrat_input
+                                        DefLabel:
+                                            text: 'Дляна кирпича:'
+                                        DefTextInput:
+                                            id: kvadrat_input
+                                        DefLabel:
+                                            text: 'Стоимость кирпича за штуку:'
+                                        DefTextInput:
+                                            id: kvadrat_input
+                                        DefLabel:
+                                            text: 'Стоимость цемента за кг'
+                                        DefTextInput:
+                                            id: kvadrat_input
+                                        DefLabel:
+                                            text: 'Стоимость песка за кг:'
+                                        DefTextInput:
+                                            id: kvadrat_input
+                                        DefLabel:
+                                            text: 'Количество рабочих:'
+                                        DefTextInput:
+                                            id: kvadrat_input
+
+                                    BoxLayout:
+                                        orientation: 'vertical'
+
+                                        MDRoundFlatButton:
+                                            # size_hint: 1, .1
+                                            theme_text_color: 'Custom'
+                                            text_color: .82, .94, .26, 1
+                                            line_color: 0, 0, 0, 1
+                                            pos_hint: {'center_x': .5, 'center_y': 1}
+                                            text: '    Посчитать    '
+                                            on_press:
+                                                root.calculate_kraska()
+
+
+                                    GridLayout:
+                                        size_hint: 1, .75
+                                        cols: 2
+                                        DefLabel:
+                                            text: 'Стоимость работ:'
+                                        Label:
+                                            text: ''
+                                        DefLabel:
+                                            valign: 'middle'
+                                            text_size: self.size
+                                            text: 'Примерное время на выполнеие работ:'
+                                        Label:
+                                            valign: 'middle'
+                                            text_size: self.size
+                                            text: 'Выведется если графа "Количество рабочих" заполнено'
+                                    # Кнопка возврата в главное меню
+                                    MDFillRoundFlatButton:
+                                        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                                        text: 'Назад'
+                                        # size_hint: 1, .1
+                                        on_release:
+                                            app.root.current = 'main'
+                                            root.manager.transition.direction = 'right'
+                        Tab:
+                            id: tab4
+                            name: 'tab4'
+                            text: 'Nothing'
+
+
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            GlobalMain:
+                id: content_drawer

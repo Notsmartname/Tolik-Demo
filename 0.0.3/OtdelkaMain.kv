@@ -1,0 +1,671 @@
+#: import Factory kivy.factory.Factory
+
+#OtdelkaMain:
+#    OtdelkaFirst:
+#    OtdelkaSecend:
+#    OtdelkaThird:
+#    OtdelkaFourth:
+
+#<PageMain@PageLayout>:
+ #   OtdelkaMain:
+ #   OtdelkaFirst:
+
+# Кномка в меню
+<DefButton@Button>:
+    background_color: .19, .31, .40, 1
+    color: .82, .94, .26, 1
+# Надпись для ввода данных
+<DefLabel@MDLabel>:
+    # halign: 'center'
+    size: self.texture_size
+    theme_text_color: 'Custom'
+    text_color: .82, .94, .26, 1
+    line_height: .8
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+# Now you can simply Mix the `BackgroundColor` class with almost
+# any other widget... to give it a background.
+<BackgroundLabel@MDLabel+BackgroundColor>
+    background_color: .40, .23, .72, 1
+    theme_text_color: 'Custom'
+    text_color: .82, .94, .26, 1
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+    line_height: .8
+
+
+
+
+
+
+# Строка для ввода данных
+<DefTextInput@MDTextField>:
+    hint_text: "Введите число в см"
+    helper_text: "Только цифры"
+    helper_text_mode: "persistent"
+
+
+# Меню Расчет отделки помещений
+<OtdelkaMain>:
+    name: 'расчет отделки'
+
+    MDToolbar:
+        title: 'Расчет отделки стен'
+        pos_hint: {"top": 1}
+        elevation: 10
+        theme_text_color: "Custom"
+        text_color: .82, .94, .26, 1
+
+    BoxLayout:
+        pos_hint_y: {'top': 1}
+        orientation: 'vertical'
+        spacing: 10
+        BoxLayout:
+
+            orientation: 'vertical'
+            spacing: 10
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                text: '    Покраска стен    '
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Покраска стен'
+                    root.manager.transition.direction = 'left'
+#                    Factory.OtdelkaFirst().open()
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                text: '            Обои              '
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Обои'
+                    root.manager.transition.direction = 'left'
+                    # Factory.OtdelkaSecend().open()
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                text: '  Облицофка стен  '
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Облицовка'
+                    root.manager.transition.direction = 'left'
+                    # Factory.OtdelkaThird().open()
+            MDFillRoundFlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                text: '  Штукатурка стен  '
+                theme_text_color: "Custom"
+                text_color: .82, .94, .26, 1
+                font_size: '20sp'
+                on_release:
+                    app.root.current = 'Штукатурка'
+                    root.manager.transition.direction = 'left'
+                    # Factory.OtdelkaFourth().open()
+        # Кнопка возврата в главное меню
+        MDFillRoundFlatButton:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            text: 'Назад'
+            # size_hint: 1, .1
+            on_release:
+                app.root.current = 'main'
+                root.manager.transition.direction = 'right'
+
+
+
+        MDBottomAppBar:
+
+#            MDToolbar:
+#                icon: 'alarm-panel'
+#                type: 'bottom'
+#                halign: "center"
+#
+#            MDToolbar:
+#                icon: 'refresh-circle'
+#                type: 'bottom'
+#                halign: 'free-end'
+#
+#            MDToolbar:
+#                icon: 'cog-outline'
+#                type: 'bottom'
+#                halign: 'free-end'
+            MDToolbar:
+                icon: 'arrow-up-circle' # 'arrow-down-circle'
+                type: 'bottom'
+                halign: 'free-end'
+
+
+# Покраска стен
+<OtdelkaFirst>:
+    name: 'Покраска стен'
+    auto_dismiss: False
+    title: 'Покраска стен'
+
+    kvadrat_input: kvadrat_input
+    pr_shpak_input: pr_shpak_input
+    pr_color_input: pr_color_input
+    pr_gruntovka_input: pr_gruntovka_input
+    pr_shkur_input: pr_shkur_input
+    workmans_input: workmans_input
+
+    answer_output: answer_output
+    answer_pr_shpak: answer_pr_shpak
+    answer_pr_color: answer_pr_color
+    answer_pr_gruntovka: answer_pr_gruntovka
+    answer_pr_shkur: answer_pr_shkur
+
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+#            canvas.before:
+#                Color:
+#                    rgba: .40, .23, .72, 1
+#                Rectangle:
+#                    size: self.size
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 10
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                # text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Стоимость шпаклевки за кг:'
+                DefTextInput:
+                    id: pr_shpak_input
+                DefLabel:
+                    text: 'Стоимость краски за литр:'
+                DefTextInput:
+                    id: pr_color_input
+                DefLabel:
+                    text: 'Стоимость грунтовки за литр:'
+                DefTextInput:
+                    id: pr_gruntovka_input
+                DefLabel:
+                    text: 'Стоимость шкурки за метр:'
+                DefTextInput:
+                    id: pr_shkur_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            BoxLayout:
+                orientation: 'vertical'
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_kraska()
+            GridLayout:
+                cols: 2
+                spacing: 1
+                BackgroundLabel:
+                    text: 'Количество ш-ки в кг:'
+                Label:
+                    id: answer_pr_shpak
+                BackgroundLabel:
+                    text: 'Количество краски:'
+                Label:
+                    id: answer_pr_color
+                BackgroundLabel:
+                    text: 'Количество грунтовки:'
+                Label:
+                    id: answer_pr_gruntovka
+                BackgroundLabel:
+                    text: 'Количество шкурки:'
+                Label:
+                    id: answer_pr_shkur
+                BackgroundLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                    text: ''
+                BackgroundLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет отделки'
+                    root.manager.transition.direction = 'right'
+
+
+
+
+# Меню расчета обоев
+<OtdelkaSecend>:
+    name: 'Обои'
+    auto_dismiss: False
+    title: 'Обои'
+
+    kvadrat_input: kvadrat_input
+    shirina_input: shirina_input
+    pr_shpak_input: pr_shpak_input
+    pr_oboi_input: pr_oboi_input
+    pr_gruntovka_input: pr_gruntovka_input
+    pr_shkur_input: pr_shkur_input
+    pr_kley_input: pr_kley_input
+
+    workmans_input: workmans_input
+    answer_output: answer_output
+    answer_pr_shpak: answer_pr_shpak
+    answer_pr_oboi: answer_pr_oboi
+    answer_pr_kley: answer_pr_kley
+    answer_pr_gruntovka: answer_pr_gruntovka
+    answer_pr_shkur: answer_pr_shkur
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+#        canvas.before:
+#            Color:
+#                rgba: .28,.33,.96,1
+#            Rectangle:
+#                size: self.size
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 5
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                    # text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Ширина обоев(по умолчанию 1м):'
+                DefTextInput:
+                    id: shirina_input
+                DefLabel:
+                    text: 'Стоимость шпаклевки за кг:'
+                DefTextInput:
+                    id: pr_shpak_input
+                DefLabel:
+                    text: 'Стоимость клея за литр:'
+                DefTextInput:
+                    id: pr_kley_input
+                DefLabel:
+                    text: 'Стоимость обоев за метр:'
+                DefTextInput:
+                    id: pr_oboi_input
+                DefLabel:
+                    text: 'Стоимость грунтовки за литр:'
+                DefTextInput:
+                    id: pr_gruntovka_input
+                DefLabel:
+                    text: 'Стоимость шкурки за метр:'
+                DefTextInput:
+                    id: pr_shkur_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+
+            BoxLayout:
+                pos_hint: {'center_x': .84, 'center_y': 1}
+
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_oboi()
+
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество шпаклевки:'
+                DefLabel:
+                    id: answer_pr_shpak
+                DefLabel:
+                    text: 'Количество обоев:'
+                DefLabel:
+                    id: answer_pr_oboi
+                DefLabel:                    
+                    text: 'Количество клея за литр:'
+                DefLabel:
+                    id: answer_pr_kley
+                DefLabel:
+                    text: 'Количество грунтовки:'
+                DefLabel:
+                    id: answer_pr_gruntovka
+                DefLabel:
+                    text: 'Количество шкурки:'
+                DefLabel:
+                    id: answer_pr_shkur
+                DefLabel:
+                    text: 'Стоимость работ:'
+                DefLabel:
+                    id: answer_output
+                    text: ''
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет отделки'
+                    root.manager.transition.direction = 'right'
+
+# Меню расчета облицовки
+<OtdelkaThird>:
+    name: 'Облицовка'
+    auto_dismiss: False
+    title: 'Облицовка'
+
+    kvadrat_input: kvadrat_input
+    shirina_kafel_input: shirina_kafel_input
+    dlina_kafel_input: dlina_kafel_input
+    pr_kafel_input: pr_kafel_input
+    pr_gruntovka_input: pr_gruntovka_input
+    pr_kley_input: pr_kley_input
+    workmans_input: workmans_input
+    answer_output: answer_output
+    answer_kafel: answer_kafel
+    answer_pr_gruntovka: answer_pr_gruntovka
+    answer_pr_kley: answer_pr_kley
+    answer_pr_fuga: answer_pr_fuga
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+#        canvas.before:
+#            Color:
+#                rgba: .28,.33,.96,1
+#            Rectangle:
+#                size: self.size
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 5
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                    text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Ширина кафеля:'
+                DefTextInput:
+                    id: shirina_kafel_input
+                DefLabel:
+                    text: 'Дляна кафеля:'
+                DefTextInput:
+                    id: dlina_kafel_input
+                DefLabel:
+                    text: 'Стоимость кафеля за м2:'
+                DefTextInput:
+                    id: pr_kafel_input
+                DefLabel:
+                    text: 'Стоимость грунтовки за литр:'
+                DefTextInput:
+                    id: pr_gruntovka_input
+                DefLabel:
+                    text: 'Стоимость клея за кг:'
+                DefTextInput:
+                    id: pr_kley_input
+                DefLabel:
+                    text: 'Стоимость фуги за кг:'
+                DefTextInput:
+                    id: pr_fuga_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            BoxLayout:
+                orientation: 'vertical'
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_oblisovka()
+
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество кафеля:'
+                DefLabel:
+                    id: answer_kafel
+                DefLabel:
+                    text: 'Количество грунтовки:'
+                DefLabel:
+                    id: answer_pr_gruntovka
+                DefLabel:
+                    text: 'Количество клея:'
+                DefLabel:
+                    id: answer_pr_kley
+                DefLabel:
+                    text: 'Количество фуги:'
+                DefLabel:
+                    id: answer_pr_fuga
+                DefLabel:
+                    text: 'Стоимость работ:'
+                DefLabel:
+                    id: answer_output
+                    text: ''
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет отделки'
+                    root.manager.transition.direction = 'right'
+
+
+# Меню расчета Штукатурка
+<OtdelkaFourth>:
+    name: 'Штукатурка'
+    auto_dismiss: False
+    title: 'Штукатурка'
+
+    kvadrat_input: kvadrat_input
+    smes_input: smes_input
+    tsement_input: tsement_input
+    pesok_input: pesok_input
+    pr_gruntovka_input: pr_gruntovka_input
+    setka_input: setka_input
+
+    answer_smes: answer_smes
+    answer_tsement: answer_tsement
+    answer_pesok: answer_pesok
+    answer_pr_gruntovka: answer_smes
+    answer_setka: answer_setka
+    workmans_input: workmans_input
+    answer_output: answer_output
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            height: '900sp'
+            orientation: 'vertical'
+            size_hint_y: None
+            # size: root.width, root.height
+            padding: 10
+            spacing: 10
+#        canvas.before:
+#            Color:
+#                rgba: .28,.33,.96,1
+#            Rectangle:
+#                size: self.size
+
+            GridLayout:
+                size_hint_y: .35
+                spacing: 5
+                cols: 2
+                DefLabel:
+                    text: 'Квадратура:'
+                DefTextInput:
+                    id: kvadrat_input
+                    # text: 'Обезательно для ввода'
+                DefLabel:
+                    text: 'Стоимость смеси за кг:'
+                DefTextInput:
+                    id: smes_input
+                DefLabel:
+                    text: 'Стоимость цемента за кг:'
+                DefTextInput:
+                    id: tsement_input
+                DefLabel:
+                    text: 'Стоимость песка за кг:'
+                DefTextInput:
+                    id: pesok_input
+                DefLabel:
+                    text: 'Стоимость грунтовки за литр:'
+                DefTextInput:
+                    id: pr_gruntovka_input
+                DefLabel:
+                    text: 'Стоимость арматурной сетки за м2:'
+                DefTextInput:
+                    id: setka_input
+                DefLabel:
+                    text: 'Количество рабочих:'
+                DefTextInput:
+                    id: workmans_input
+            BoxLayout:
+                orientation: 'vertical'
+                MDRoundFlatButton:
+                    # size_hint: 1, .1
+                    theme_text_color: 'Custom'
+                    text_color: .82, .94, .26, 1
+                    line_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': 1}
+                    text: '    Посчитать    '
+                    on_press:
+                        root.calculate_shtukaturka()
+
+            GridLayout:
+                size_hint: 1, .75
+                cols: 2
+                DefLabel:
+                    text: 'Количество смеси:'
+                DefLabel:
+                    id: answer_smes
+                DefLabel:
+                    text: 'Количество цемента:'
+                DefLabel:
+                    id: answer_tsement
+                DefLabel:
+                    text: 'Количество песка:'
+                DefLabel:
+                    id: answer_pesok
+                DefLabel:
+                    text: 'Количество грунтовки:'
+                DefLabel:
+                    id: answer_pr_gruntovka
+                DefLabel:
+                    text: 'Количество арматурной сетки:'
+                DefLabel:
+                    id: answer_setka
+                DefLabel:
+                    text: 'Стоимость работ:'
+                Label:
+                    id: answer_output
+                    text: ''
+                DefLabel:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Примерное время на выполнеие работ:'
+                Label:
+                    valign: 'middle'
+                    text_size: self.size
+                    text: 'Выведется если графа "Количество рабочих" заполнено'
+
+            MDRoundFlatButton:
+                text: 'Назад'
+                # size_hint: 1, .1
+                line_color: 0, 0, 0, 1
+                theme_text_color: 'Custom'
+                text_color: .82, .94, .26, 1
+                pos_hint: {'center_x': .5, 'center_y': 1}
+                on_press:
+                    app.root.current = 'расчет отделки'
+                    root.manager.transition.direction = 'right'
+
+
+
